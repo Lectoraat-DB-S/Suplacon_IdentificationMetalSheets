@@ -1,5 +1,6 @@
 # Identification Metal Sheets
 Vision system for reading codes on metal scheets!
+This project is done in cooperation with Suplacon in Emmeloord.
 
 # template-repository 🦾
 codering
