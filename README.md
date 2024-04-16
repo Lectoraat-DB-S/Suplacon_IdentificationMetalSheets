@@ -10,8 +10,8 @@ This project is done in cooperation with Suplacon in Emmeloord.
 ### Installatie
 Stappenplan voor installeren benodigde software
 #### HALCON
-1. Vraag als student een activatietoken aan: [Request-Form-Student] (https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
-2. Activeer het token door de volgende studenthandleiding te doorlopen: [Manual-For-Students] (https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
+1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
+2. Activeer het token door de volgende studenthandleiding te doorlopen: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
 3. Download het softwarepakket
 4. Installeer het softwarepakket
 #### Driver
