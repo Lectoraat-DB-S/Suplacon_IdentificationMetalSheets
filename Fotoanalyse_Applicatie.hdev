@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="23.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* Step0: Preparation</c>
+<l>FontName := 'Industrial_0-9_NoRej'</l>
+<l>list_image_files ('Fotos_Plaatcodes', 'jpg', [], ImageFiles)</l>
+<l>dev_update_window ('off')</l>
+<l>*stop()</l>
+<c>* </c>
+<c>* Step1: Segmentation</c>
+<l>read_image (Image, 'Fotos_Plaatcodes/2.jpg')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>zoom_image_factor(Image, ImageZoom, 0.25, 0.25, 'constant')</l>
+<l>rgb1_to_gray(ImageZoom, ImageGray)</l>
+<l>get_image_size (ImageGray, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 20, 'mono', 'true', 'false')</l>
+<l>dev_display (ImageGray)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c></c>
+<l>gray_range_rect (ImageGray, ImageResult, 5, 5)</l>
+<l>emphasize (ImageResult, ImageEnhanced, Width, Height, 8)</l>
+<l>*illuminate (ImageResult, ImageEnhanced, Width, Height, 2)</l>
+<l>invert_image (ImageEnhanced, ImageInvert)</l>
+<l>dev_display (ImageInvert)</l>
+<l>stop()</l>
+<c></c>
+<l>threshold (ImageInvert, Regions, 0, 32)</l>
+<l>connection (Regions, ConnectedRegions)</l>
+<l>dev_display (ConnectedRegions)</l>
+<l>stop()</l>
+<c></c>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 150, 1500)</l>
+<l>dev_clear_window()</l>
+<l>dev_display (ImageInvert)</l>
+<l>dev_display (SelectedRegions)</l>
+<l>stop()</l>
+<c></c>
+<l>erosion_circle (SelectedRegions, RegionErosion, 3.5)</l>
+<l>connection (RegionErosion, ConnectedRegionsErosion)</l>
+<l>dev_clear_window()</l>
+<l>dev_display (ImageInvert)</l>
+<l>dev_display (ConnectedRegionsErosion)</l>
+<l>stop()</l>
+<c></c>
+<l>select_shape (ConnectedRegionsErosion, SelectedRegionsErosion, 'area', 'and', 75, 99999)</l>
+<l>dev_clear_window()</l>
+<l>dev_display (ImageInvert)</l>
+<l>dev_display (SelectedRegionsErosion)</l>
+<l>stop()</l>
+<c></c>
+<l>sort_region (SelectedRegionsErosion, SortedRegions, 'first_point', 'true', 'column')</l>
+<l>dev_set_colored (6)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_shape ('original')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (ImageResult)</l>
+<l>dev_display (SortedRegions)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Step2: Reading</c>
+<l>dev_set_shape ('rectangle1')</l>
+<l>dev_display (ImageGray)</l>
+<l>dev_display (SortedRegions)</l>
+<l>shape_trans (SortedRegions, RegionTrans, 'rectangle1')</l>
+<l>area_center (RegionTrans, Area, Row, Column)</l>
+<l>MeanRow := mean(Row)</l>
+<l>count_obj (SortedRegions, Number)</l>
+<l>read_ocr_class_mlp (FontName, OCRHandle)</l>
+<l>for I := 1 to Number by 1</l>
+<l>    select_obj (SortedRegions, ObjectSelected, I)</l>
+<l>    do_ocr_single_class_mlp (ObjectSelected, ImageInvert, OCRHandle, 1, Class, Confidence)</l>
+<l>    disp_message (WindowHandle, Class, 'image', MeanRow - 80, Column[I - 1] - 10, 'yellow', 'false')</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
