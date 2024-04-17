@@ -19,41 +19,37 @@
 <l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
 <l>set_display_font (WindowHandle, 20, 'mono', 'true', 'false')</l>
 <l>dev_display (ImageGray)</l>
-<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
 <l>stop ()</l>
 <c></c>
 <l>gray_range_rect (ImageGray, ImageResult, 5, 5)</l>
-<l>emphasize (ImageResult, ImageEnhanced, Width, Height, 8)</l>
-<l>*illuminate (ImageResult, ImageEnhanced, Width, Height, 2)</l>
+<l>*scale_image_max (ImageResult, ImageEnhanced)</l>
+<l>emphasize (ImageResult, ImageEnhanced, Width, Height, 2)</l>
+<l>*illuminate (ImageEnhanced, ImageEnhanced, Width, Height, 2)</l>
 <l>invert_image (ImageEnhanced, ImageInvert)</l>
 <l>dev_display (ImageInvert)</l>
 <l>stop()</l>
 <c></c>
-<l>threshold (ImageInvert, Regions, 0, 32)</l>
+<l>var_threshold (ImageInvert, Regions, 15, 15, 0.2, 2, 'dark')</l>
 <l>connection (Regions, ConnectedRegions)</l>
 <l>dev_display (ConnectedRegions)</l>
 <l>stop()</l>
 <c></c>
-<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 150, 1500)</l>
+<l>*erosion_circle (ConnectedRegions, RegionErosion, 1.5)</l>
+<l>*connection (RegionErosion, ConnectedRegionsErosion)</l>
+<l>*dev_clear_window()</l>
+<l>*dev_display (ImageInvert)</l>
+<l>*dev_display (ConnectedRegionsErosion)</l>
+<l>*stop()</l>
+<c></c>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 450, 900)</l>
+<l>select_shape (SelectedRegions, SelectedRegionsWidth, 'width', 'and', 0, 60)</l>
+<l>select_shape (SelectedRegionsWidth, SelectedRegionsHeight, 'height', 'and', 0, 60)</l>
 <l>dev_clear_window()</l>
 <l>dev_display (ImageInvert)</l>
-<l>dev_display (SelectedRegions)</l>
+<l>dev_display (SelectedRegionsHeight)</l>
 <l>stop()</l>
 <c></c>
-<l>erosion_circle (SelectedRegions, RegionErosion, 3.5)</l>
-<l>connection (RegionErosion, ConnectedRegionsErosion)</l>
-<l>dev_clear_window()</l>
-<l>dev_display (ImageInvert)</l>
-<l>dev_display (ConnectedRegionsErosion)</l>
-<l>stop()</l>
-<c></c>
-<l>select_shape (ConnectedRegionsErosion, SelectedRegionsErosion, 'area', 'and', 75, 99999)</l>
-<l>dev_clear_window()</l>
-<l>dev_display (ImageInvert)</l>
-<l>dev_display (SelectedRegionsErosion)</l>
-<l>stop()</l>
-<c></c>
-<l>sort_region (SelectedRegionsErosion, SortedRegions, 'first_point', 'true', 'column')</l>
+<l>sort_region (SelectedRegionsHeight, SortedRegions, 'first_point', 'true', 'column')</l>
 <l>dev_set_colored (6)</l>
 <l>dev_set_draw ('margin')</l>
 <l>dev_set_shape ('original')</l>
