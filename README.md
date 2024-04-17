@@ -3,7 +3,7 @@ Vision system for reading codes on metal scheets!
 This project is done in cooperation with Suplacon in Emmeloord.
 
 ## Benodigde software
-- 
+- MVTec HALCON 23.11 Progress Student Edition 
 - Driver
 - OPC UA Server
 
@@ -11,9 +11,8 @@ This project is done in cooperation with Suplacon in Emmeloord.
 Stappenplan voor installeren benodigde software
 #### HALCON
 1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
-2. Activeer het token door de volgende studenthandleiding te doorlopen: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
-3. Download het softwarepakket
-4. Installeer het softwarepakket
+2. Doorloop de volgende studenthandleiding: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
+
 #### Driver
 
 #### OPC UA Server
