@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="23.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image(Image, 'D:/Suplacon_IdentificationMetalSheets/Vision_Systeem/Fotos_Plaatcodes/2.jpg')</l>
+<l>count_regions (Image, Value)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="count_regions">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oc>
+<par name="Value" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>threshold(Image, Region, 0, 122)</l>
+<l>connection(Region, ConnectedRegions)</l>
+<l>region_features(ConnectedRegions, 'area', Value)</l>
+<l>return ()</l>
+</body>
+<docu id="count_regions">
+<parameters>
+<parameter id="Image"/>
+<parameter id="Value"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
