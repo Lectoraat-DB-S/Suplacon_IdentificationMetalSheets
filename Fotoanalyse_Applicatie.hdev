@@ -22,9 +22,7 @@
 <l>stop ()</l>
 <c></c>
 <l>gray_range_rect (ImageGray, ImageResult, 5, 5)</l>
-<l>*scale_image_max (ImageResult, ImageEnhanced)</l>
 <l>emphasize (ImageResult, ImageEnhanced, Width, Height, 2)</l>
-<l>*illuminate (ImageEnhanced, ImageEnhanced, Width, Height, 2)</l>
 <l>invert_image (ImageEnhanced, ImageInvert)</l>
 <l>dev_display (ImageInvert)</l>
 <l>stop()</l>
@@ -33,13 +31,6 @@
 <l>connection (Regions, ConnectedRegions)</l>
 <l>dev_display (ConnectedRegions)</l>
 <l>stop()</l>
-<c></c>
-<l>*erosion_circle (ConnectedRegions, RegionErosion, 1.5)</l>
-<l>*connection (RegionErosion, ConnectedRegionsErosion)</l>
-<l>*dev_clear_window()</l>
-<l>*dev_display (ImageInvert)</l>
-<l>*dev_display (ConnectedRegionsErosion)</l>
-<l>*stop()</l>
 <c></c>
 <l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 450, 900)</l>
 <l>select_shape (SelectedRegions, SelectedRegionsWidth, 'width', 'and', 0, 60)</l>
