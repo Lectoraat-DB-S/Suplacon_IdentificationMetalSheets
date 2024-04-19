@@ -1,7 +1,8 @@
 // Vision_Systeem.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-//#include <string>
+#define PHOTO_NAME "Fotos_Plaatcodes/4.jpg"
+
 #include <iostream>
 
 #include "HalconCpp.h"
@@ -11,12 +12,11 @@ using namespace HalconCpp;
 
 int main()
 {
-	char photoName[] = "Fotos_Plaatcodes/4.jpg";
-
 	//Collecting image
-	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", photoName, "default", 1, -1);
+	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTO_NAME, "default", 1, -1);
 	camera.GrabImageStart(-1);
 	HImage image = camera.GrabImageAsync(-1);
+	camera.CloseFramegrabber();
 
 	//Preprocessing image
 	image = image.ZoomImageFactor(0.25, 0.25, "constant");
