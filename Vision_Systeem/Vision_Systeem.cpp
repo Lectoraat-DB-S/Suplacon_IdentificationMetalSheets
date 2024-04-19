@@ -43,9 +43,9 @@ int main()
 	HTuple foundNumbers{}, confidences{};
 
 	Hlong numbersCount = outlineNumbers.CountObj();
-	for (byte i = 0; i < numbersCount; i++)
+	for (int i = 0; i < numbersCount; i++)
 	{
-		HRegion outlineNumber = outlineNumbers.SelectObj(i + (byte)1);
+		HRegion outlineNumber = outlineNumbers.SelectObj(i + 1);
 
 		double confidence;
 		HString foundNumber = classifier.DoOcrSingleClassMlp(outlineNumber, image, 1, &confidence);
