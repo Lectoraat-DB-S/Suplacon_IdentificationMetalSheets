@@ -1,11 +1,13 @@
 // Vision_Systeem.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#define PHOTO_NAME "Fotos_Plaatcodes/4.jpg"
+#define PHOTO_NAME "Fotos_Plaatcodes/2.jpg" //"Fotos_Plaatcodes/4.jpg"
 
 #include <iostream>
 
 #include "HalconCpp.h"
+
+#include "IdentifyDigits.h"
 
 using namespace std;
 using namespace HalconCpp;
@@ -38,31 +40,12 @@ int main()
 	outlineNumbers = outlineNumbers.SelectShape("height", "and", 0, 60);
 	outlineNumbers = outlineNumbers.SortRegion("first_point", "true", "column");
 
-	//Identifying/Reading numbers
-	HOCRMlp classifier = HOCRMlp("Industrial_0-9_NoRej");
-	HTuple foundNumbers{}, confidences{};
+	IdentifyNumbers identifier = IdentifyNumbers(image, outlineNumbers, "Industrial_0-9_NoRej");
+	identifier.execute();
+	identifier.print();
 
-	Hlong numbersCount = outlineNumbers.CountObj();
-	for (int i = 0; i < numbersCount; i++)
-	{
-		HRegion outlineNumber = outlineNumbers.SelectObj(i + 1);
-
-		double confidence;
-		HString foundNumber = classifier.DoOcrSingleClassMlp(outlineNumber, image, 1, &confidence);
-
-		confidences.Append(confidence);
-		foundNumbers.Append(foundNumber);
-	}
-
-	//Display found numbers
-	HTuple row, column;
-	HTuple area = outlineNumbers.AreaCenter(&row, &column);
-
-	for (byte i = 0; i < numbersCount; i++)
-	{
-		double shortConfidence = round(confidences[i].D() * 1000) / 1000;
-		cout << "Number: " << foundNumbers[i].S().Text() << ", X/Y: " << row[i].D() << "/" << column[i].D() << ", Confidence: " << shortConfidence << "\n";
-	}
+	//FoundDigit* numbers = identifier.getFoundDigits();
+	//cout << numbers[1].row;
 
 	cin.get();
 

@@ -18,5 +18,13 @@
     <ClCompile Include="Vision_Systeem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IdentifyDigits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IdentifyDigits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

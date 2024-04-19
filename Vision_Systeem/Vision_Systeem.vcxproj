@@ -154,7 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IdentifyDigits.cpp" />
     <ClCompile Include="Vision_Systeem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IdentifyDigits.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
