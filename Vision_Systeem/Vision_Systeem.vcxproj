@@ -154,11 +154,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FindDigits.cpp" />
     <ClCompile Include="IdentifyDigits.cpp" />
     <ClCompile Include="PrepImage.cpp" />
     <ClCompile Include="Vision_Systeem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FindDigits.h" />
     <ClInclude Include="IdentifyDigits.h" />
     <ClInclude Include="PrepImage.h" />
   </ItemGroup>

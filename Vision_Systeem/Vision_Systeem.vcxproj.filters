@@ -24,12 +24,18 @@
     <ClCompile Include="PrepImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FindDigits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IdentifyDigits.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PrepImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindDigits.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,13 +1,15 @@
 // Vision_Systeem.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#define PHOTO_NAME "Fotos_Plaatcodes/2.jpg" //"Fotos_Plaatcodes/4.jpg"
+#define PHOTO_NAME "Fotos_Plaatcodes/1.jpg" //"Fotos_Plaatcodes/4.jpg"
+#define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
 #include <iostream>
 
 #include "HalconCpp.h"
 
 #include "PrepImage.h"
+#include "FindDigits.h"
 #include "IdentifyDigits.h"
 
 using namespace std;
@@ -26,22 +28,16 @@ int main()
 	prepper.print();
 	HImage preppedImage = prepper.getImage();
 
+	FindDigits finder = FindDigits(preppedImage);
+	finder.execute();
+	finder.print();
+	HRegion outlineDigits = finder.getOutlineDigits();
 
-	//Finding possible numbers
-	HRegion darkRegions = preppedImage.VarThreshold(15, 15, 0.2, 2, "dark");
-	HRegion outlineNumbers = darkRegions.Connection();
-
-	outlineNumbers = outlineNumbers.SelectShape("area", "and", 450, 900);
-	outlineNumbers = outlineNumbers.SelectShape("width", "and", 0, 60);
-	outlineNumbers = outlineNumbers.SelectShape("height", "and", 0, 60);
-	outlineNumbers = outlineNumbers.SortRegion("first_point", "true", "column");
-
-
-	IdentifyDigits identifier = IdentifyDigits(preppedImage, outlineNumbers, "Industrial_0-9_NoRej");
+	IdentifyDigits identifier = IdentifyDigits(preppedImage, outlineDigits, OCR_FONT_NAME);
 	identifier.execute();
 	identifier.print();
-
 	//FoundDigit* numbers = identifier.getFoundDigits();
+
 	//cout << numbers[1].row;
 
 	cin.get();

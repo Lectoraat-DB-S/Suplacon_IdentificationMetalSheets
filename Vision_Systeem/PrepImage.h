@@ -2,7 +2,7 @@
 #define PREP_IMAGE_H
 
 #define ZOOM_FACTOR 0.25
-#define MASK_SIZE 5
+#define PREPPER_MASK_SIZE 5
 #define EMPHASIZE_FACTOR 2
 
 #include "HalconCpp.h"

@@ -13,7 +13,7 @@ bool PrepImage::execute()
 {
 	image = image.ZoomImageFactor(ZOOM_FACTOR, ZOOM_FACTOR, "constant");
 	image = image.Rgb1ToGray();
-	image = image.GrayRangeRect(MASK_SIZE, MASK_SIZE);
+	image = image.GrayRangeRect(PREPPER_MASK_SIZE, PREPPER_MASK_SIZE);
 
 	Hlong width, height;
 	image.GetImageSize(&width, &height);
@@ -26,7 +26,7 @@ bool PrepImage::execute()
 
 void PrepImage::print()
 {
-	std::cout << "ZOOM: " << ZOOM_FACTOR << ", MASK: " << MASK_SIZE << ", EMPHASIZE: " << EMPHASIZE_FACTOR << "\n";
+	std::cout << "IMAGE_ZOOM: " << ZOOM_FACTOR << ", EMPHASIZE_FACTOR: " << EMPHASIZE_FACTOR << "\n";
 };
 
 

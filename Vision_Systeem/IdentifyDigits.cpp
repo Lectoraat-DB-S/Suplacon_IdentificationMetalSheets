@@ -45,8 +45,7 @@ void IdentifyDigits::print()
 	if (digitCount > MAX_DIGITS)
 		digitCount = MAX_DIGITS;
 
-	std::cout << "-> The following " << digitCount << " digits have been found! <-\n";
-
+	std::cout << "--V The following " << digitCount << " digits have been printed. V--\n";
 	for (byte i = 0; i < digitCount; i++)
 	{
 		double shortConfidence = round(foundDigits[i].confidence * 1000) / 1000;
