@@ -40,7 +40,7 @@ int main()
 	outlineNumbers = outlineNumbers.SelectShape("height", "and", 0, 60);
 	outlineNumbers = outlineNumbers.SortRegion("first_point", "true", "column");
 
-	IdentifyNumbers identifier = IdentifyNumbers(image, outlineNumbers, "Industrial_0-9_NoRej");
+	IdentifyDigits identifier = IdentifyDigits(image, outlineNumbers, "Industrial_0-9_NoRej");
 	identifier.execute();
 	identifier.print();
 

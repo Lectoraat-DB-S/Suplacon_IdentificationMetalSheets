@@ -15,7 +15,7 @@ struct FoundDigit {
 	double column{};
 };
 
-class IdentifyNumbers
+class IdentifyDigits
 {
 
 private:
@@ -25,7 +25,7 @@ private:
 	FoundDigit foundDigits[MAX_DIGITS];
 
 public:
-	IdentifyNumbers(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
+	IdentifyDigits(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
 
 	bool execute();
 

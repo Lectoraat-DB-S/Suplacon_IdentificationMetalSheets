@@ -5,14 +5,14 @@
 using namespace std;
 using namespace HalconCpp;
 
-IdentifyNumbers::IdentifyNumbers(HImage image, HRegion outlineNumbers, const char* fontName)
+IdentifyDigits::IdentifyDigits(HImage image, HRegion outlineNumbers, const char* fontName)
 {
 	this->image = image;
 	this->outlineDigits = outlineNumbers;
 	this->classifier = HOCRMlp(fontName);
 }
 
-bool IdentifyNumbers::execute()
+bool IdentifyDigits::execute()
 {
 	HTuple row{}, column{};
 	HTuple area = outlineDigits.AreaCenter(&row, &column);
@@ -40,7 +40,7 @@ bool IdentifyNumbers::execute()
 	return true;
 }
 
-void IdentifyNumbers::print()
+void IdentifyDigits::print()
 {
 	Hlong digitCount = outlineDigits.CountObj();
 	if (digitCount > MAX_DIGITS)
