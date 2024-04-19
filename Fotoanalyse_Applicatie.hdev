@@ -10,12 +10,11 @@
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[4,1]" as_ord="1">close_framegrabber (AcqHandle)</l>
 <c></c>
 <c>* Step1: Segmentation</c>
-<l>get_image_size (Image, Width, Height)</l>
 <l>zoom_image_factor(Image, ImageZoom, 0.25, 0.25, 'constant')</l>
 <l>rgb1_to_gray(ImageZoom, ImageGray)</l>
-<l>get_image_size (ImageGray, Width, Height)</l>
 <c></c>
 <l>gray_range_rect (ImageGray, ImageResult, 5, 5)</l>
+<l>get_image_size (ImageGray, Width, Height)</l>
 <l>emphasize (ImageResult, ImageEnhanced, Width, Height, 2)</l>
 <l>invert_image (ImageEnhanced, ImageInvert)</l>
 <c></c>
@@ -29,9 +28,6 @@
 <l>sort_region (SelectedRegionsHeight, SortedRegions, 'first_point', 'true', 'column')</l>
 <c></c>
 <c>* Step2: Reading</c>
-<l>shape_trans (SortedRegions, RegionTrans, 'rectangle1')</l>
-<l>area_center (RegionTrans, Area, Row, Column)</l>
-<l>MeanRow := mean(Row)</l>
 <l>count_obj (SortedRegions, Number)</l>
 <l>read_ocr_class_mlp ('Industrial_0-9_NoRej', OCRHandle) </l>
 <l>for I := 1 to Number by 1</l>

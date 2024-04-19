@@ -1,25 +1,70 @@
 // Vision_Systeem.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
+//#include <string>
 #include <iostream>
+
 #include "HalconCpp.h"
 
-using HalconCpp::HImage;
-using HalconCpp::HRegion;
-using HalconCpp::HTuple;
+using namespace std;
+using namespace HalconCpp;
 
 int main()
 {
-	//Laad de foto in
-	HImage img{ "Fotos_Plaatcodes/2.jpg" };
+	char photoName[] = "Fotos_Plaatcodes/4.jpg";
 
-	//Werkende code -> 'Verwachte Area: 2652682'
-	HRegion region = img.Threshold(0, 122);
-	HRegion connectedRegions = region.Connection();
-	HTuple area = connectedRegions.Area();
-	std::cout << "Verwachte Area: " << area.L() << '\n'; 
+	//Collecting image
+	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", photoName, "default", 1, -1);
+	camera.GrabImageStart(-1);
+	HImage image = camera.GrabImageAsync(-1);
+
+	//Preprocessing image
+	image = image.ZoomImageFactor(0.25, 0.25, "constant");
+	image = image.Rgb1ToGray();
+	image = image.GrayRangeRect(5, 5);
+	
+	Hlong width, height;
+	image.GetImageSize(&width, &height);
+	image = image.Emphasize(width, height, 2);
+
+	image = image.InvertImage();
+
+	//Finding possible numbers
+	HRegion darkRegions = image.VarThreshold(15, 15, 0.2, 2, "dark");
+	HRegion outlineNumbers = darkRegions.Connection();
+
+	outlineNumbers = outlineNumbers.SelectShape("area", "and", 450, 900);
+	outlineNumbers = outlineNumbers.SelectShape("width", "and", 0, 60);
+	outlineNumbers = outlineNumbers.SelectShape("height", "and", 0, 60);
+	outlineNumbers = outlineNumbers.SortRegion("first_point", "true", "column");
+
+	//Identifying/Reading numbers
+	HOCRMlp classifier = HOCRMlp("Industrial_0-9_NoRej");
+	HTuple foundNumbers{}, confidences{};
+
+	Hlong numbersCount = outlineNumbers.CountObj();
+	for (byte i = 0; i < numbersCount; i++)
+	{
+		HRegion outlineNumber = outlineNumbers.SelectObj(i + (byte)1);
+
+		double confidence;
+		HString foundNumber = classifier.DoOcrSingleClassMlp(outlineNumber, image, 1, &confidence);
+
+		confidences.Append(confidence);
+		foundNumbers.Append(foundNumber);
+	}
+
+	//Display found numbers
+	HTuple row, column;
+	HTuple area = outlineNumbers.AreaCenter(&row, &column);
+
+	for (byte i = 0; i < numbersCount; i++)
+	{
+		double shortConfidence = round(confidences[i].D() * 1000) / 1000;
+		cout << "Number: " << foundNumbers[i].S().Text() << ", X/Y: " << row[i].D() << "/" << column[i].D() << ", Confidence: " << shortConfidence << "\n";
+	}
+
+	cin.get();
+
 }
 
