@@ -2,7 +2,6 @@
 
 #include "IdentifyDigits.h"
 
-using namespace std;
 using namespace HalconCpp;
 
 IdentifyDigits::IdentifyDigits(HImage image, HRegion outlineNumbers, const char* fontName)
@@ -46,12 +45,12 @@ void IdentifyDigits::print()
 	if (digitCount > MAX_DIGITS)
 		digitCount = MAX_DIGITS;
 
-	cout << "-> The following " << digitCount << " digits have been found! <-\n";
+	std::cout << "-> The following " << digitCount << " digits have been found! <-\n";
 
 	for (byte i = 0; i < digitCount; i++)
 	{
 		double shortConfidence = round(foundDigits[i].confidence * 1000) / 1000;
-		cout << "Digit: " << foundDigits[i].value << ", X/Y: " << foundDigits[i].row << "/" << foundDigits[i].column << ", Confidence: " << shortConfidence << "\n";
+		std::cout << "Digit: " << foundDigits[i].value << ", X/Y: " << foundDigits[i].row << "/" << foundDigits[i].column << ", Confidence: " << shortConfidence << "\n";
 	}
 }
 

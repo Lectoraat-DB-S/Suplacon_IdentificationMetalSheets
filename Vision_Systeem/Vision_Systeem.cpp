@@ -7,6 +7,7 @@
 
 #include "HalconCpp.h"
 
+#include "PrepImage.h"
 #include "IdentifyDigits.h"
 
 using namespace std;
@@ -20,19 +21,14 @@ int main()
 	HImage image = camera.GrabImageAsync(-1);
 	camera.CloseFramegrabber();
 
-	//Preprocessing image
-	image = image.ZoomImageFactor(0.25, 0.25, "constant");
-	image = image.Rgb1ToGray();
-	image = image.GrayRangeRect(5, 5);
-	
-	Hlong width, height;
-	image.GetImageSize(&width, &height);
-	image = image.Emphasize(width, height, 2);
+	PrepImage prepper = PrepImage(image);
+	prepper.execute();
+	prepper.print();
+	HImage preppedImage = prepper.getImage();
 
-	image = image.InvertImage();
 
 	//Finding possible numbers
-	HRegion darkRegions = image.VarThreshold(15, 15, 0.2, 2, "dark");
+	HRegion darkRegions = preppedImage.VarThreshold(15, 15, 0.2, 2, "dark");
 	HRegion outlineNumbers = darkRegions.Connection();
 
 	outlineNumbers = outlineNumbers.SelectShape("area", "and", 450, 900);
@@ -40,7 +36,8 @@ int main()
 	outlineNumbers = outlineNumbers.SelectShape("height", "and", 0, 60);
 	outlineNumbers = outlineNumbers.SortRegion("first_point", "true", "column");
 
-	IdentifyDigits identifier = IdentifyDigits(image, outlineNumbers, "Industrial_0-9_NoRej");
+
+	IdentifyDigits identifier = IdentifyDigits(preppedImage, outlineNumbers, "Industrial_0-9_NoRej");
 	identifier.execute();
 	identifier.print();
 

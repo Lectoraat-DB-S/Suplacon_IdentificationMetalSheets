@@ -28,7 +28,6 @@ public:
 	IdentifyDigits(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
 
 	bool execute();
-
 	void print();
 
 	FoundDigit* getFoundDigits() { return foundDigits; };

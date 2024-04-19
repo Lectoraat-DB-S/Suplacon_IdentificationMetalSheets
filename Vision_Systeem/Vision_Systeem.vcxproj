@@ -155,10 +155,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IdentifyDigits.cpp" />
+    <ClCompile Include="PrepImage.cpp" />
     <ClCompile Include="Vision_Systeem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IdentifyDigits.h" />
+    <ClInclude Include="PrepImage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
