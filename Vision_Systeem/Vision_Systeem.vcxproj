@@ -154,11 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="hdev_count_regions\source\hdev_count_regions.cpp" />
     <ClCompile Include="Vision_Systeem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="hdev_count_regions\source\hdev_count_regions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

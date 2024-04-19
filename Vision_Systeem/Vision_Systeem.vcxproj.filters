@@ -18,13 +18,5 @@
     <ClCompile Include="Vision_Systeem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hdev_count_regions\source\hdev_count_regions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="hdev_count_regions\source\hdev_count_regions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
