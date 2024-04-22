@@ -1,20 +1,20 @@
 //Preprocessing image
 
-#include "PrepImage.h"
+#include "ImagePrepper.h"
 
 using namespace HalconCpp;
 
-PrepImage::PrepImage()
+ImagePrepper::ImagePrepper()
 {
 	//Do nothing
 }
 
-PrepImage::PrepImage(HImage image)
+ImagePrepper::ImagePrepper(HImage image)
 {
 	this->image = image;
 }
 
-bool PrepImage::execute()
+bool ImagePrepper::execute()
 {
 	image = image.ZoomImageFactor(ZOOM_FACTOR, ZOOM_FACTOR, "constant");
 	image = image.Rgb1ToGray();
@@ -29,14 +29,14 @@ bool PrepImage::execute()
 	return true;
 }
 
-bool PrepImage::execute(HImage image)
+bool ImagePrepper::execute(HImage image)
 {
 	this->image = image;
 
 	return execute();
 }
 
-void PrepImage::print()
+void ImagePrepper::print()
 {
 	std::cout << "IMAGE_ZOOM: " << ZOOM_FACTOR << ", EMPHASIZE_FACTOR: " << EMPHASIZE_FACTOR << "\n";
 }

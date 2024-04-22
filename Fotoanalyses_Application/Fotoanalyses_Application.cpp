@@ -7,9 +7,9 @@
 
 #include "HalconCpp.h"
 
-#include "PrepImage.h"
-#include "FindDigits.h"
-#include "IdentifyDigits.h"
+#include "ImagePrepper.h"
+#include "DigitFinder.h"
+#include "DigitIdentifier.h"
 
 using namespace std;
 using namespace HalconCpp;
@@ -19,9 +19,9 @@ int main()
 	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
 	camera.GrabImageStart(-1);
 
-	PrepImage prepper = PrepImage();
-	FindDigits finder = FindDigits();
-	IdentifyDigits identifier = IdentifyDigits(OCR_FONT_NAME);
+	ImagePrepper prepper = ImagePrepper();
+	DigitFinder finder = DigitFinder();
+	DigitIdentifier identifier = DigitIdentifier(OCR_FONT_NAME);
 
 	byte photocounter = 0;
 	while (photocounter < MAX_PHOTOCOUNT)
@@ -39,9 +39,9 @@ int main()
 
 		identifier.execute(preppedImage, outlineDigits);
 		identifier.print();
-		FoundDigit* numbers = identifier.getFoundDigits();
+		Digit* number = identifier.getFoundDigits();
 		
-		//Do something with 'numbers'
+		//Do something with 'number'
 
 		photocounter++;
 	}

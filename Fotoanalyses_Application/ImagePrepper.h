@@ -7,15 +7,15 @@
 
 #include "HalconCpp.h"
 
-class PrepImage
+class ImagePrepper
 {
 
 private:
 	HalconCpp::HImage image;
 
 public:
-	PrepImage();
-	PrepImage(HalconCpp::HImage image);
+	ImagePrepper();
+	ImagePrepper(HalconCpp::HImage image);
 
 	bool execute();
 	bool execute(HalconCpp::HImage image);

@@ -155,15 +155,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FindDigits.cpp" />
-    <ClCompile Include="IdentifyDigits.cpp" />
-    <ClCompile Include="PrepImage.cpp" />
+    <ClCompile Include="DigitFinder.cpp" />
+    <ClCompile Include="DigitIdentifier.cpp" />
+    <ClCompile Include="ImagePrepper.cpp" />
     <ClCompile Include="Fotoanalyses_Application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FindDigits.h" />
-    <ClInclude Include="IdentifyDigits.h" />
-    <ClInclude Include="PrepImage.h" />
+    <ClInclude Include="DigitFinder.h" />
+    <ClInclude Include="DigitIdentifier.h" />
+    <ClInclude Include="ImagePrepper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

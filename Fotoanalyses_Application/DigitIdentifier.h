@@ -8,31 +8,31 @@
 
 #include "HalconCpp.h"
 
-struct FoundDigit {
+struct Digit {
 	std::string value{};
 	double confidence{};
 	double row{};
 	double column{};
 };
 
-class IdentifyDigits
+class DigitIdentifier
 {
 
 private:
 	HalconCpp::HImage image;
 	HalconCpp::HRegion outlineDigits;
 	HalconCpp::HOCRMlp classifier;
-	FoundDigit foundDigits[MAX_DIGITS];
+	Digit foundDigits[MAX_DIGITS];
 
 public:
-	IdentifyDigits(const char* fontName);
-	IdentifyDigits(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
+	DigitIdentifier(const char* fontName);
+	DigitIdentifier(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
 
 	bool execute();
 	bool execute(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits);
 	void print();
 
-	FoundDigit* getFoundDigits() { return foundDigits; };
+	Digit* getFoundDigits() { return foundDigits; };
 };
 
 #endif

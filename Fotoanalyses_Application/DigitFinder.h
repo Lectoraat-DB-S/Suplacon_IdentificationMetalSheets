@@ -12,15 +12,15 @@
 
 #include "HalconCpp.h"
 
-class FindDigits
+class DigitFinder
 {
 private:
 	HalconCpp::HImage image{};
 	HalconCpp::HRegion outlineDigits{};
 
 public:
-	FindDigits();
-	FindDigits(HalconCpp::HImage image);
+	DigitFinder();
+	DigitFinder(HalconCpp::HImage image);
 
 	bool execute();
 	bool execute(HalconCpp::HImage image);

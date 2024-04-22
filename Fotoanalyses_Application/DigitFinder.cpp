@@ -1,19 +1,19 @@
 //Finding possible numbers
-#include "FindDigits.h"
+#include "DigitFinder.h"
 
 using namespace HalconCpp;
 
-FindDigits::FindDigits()
+DigitFinder::DigitFinder()
 {
 	//Do nothing
 }
 
-FindDigits::FindDigits(HImage image)
+DigitFinder::DigitFinder(HImage image)
 {
 	this->image = image;
 }
 
-bool FindDigits::execute()
+bool DigitFinder::execute()
 {
 	HRegion darkRegions = image.VarThreshold(FINDER_MASK_SIZE, FINDER_MASK_SIZE, STD_DEV_SCALE, ABS_THRESHOLD, "dark");
 	darkRegions = darkRegions.Connection();
@@ -27,14 +27,14 @@ bool FindDigits::execute()
 	return true;
 }
 
-bool FindDigits::execute(HImage image)
+bool DigitFinder::execute(HImage image)
 {
 	this->image = image;
 	
 	return execute();
 }
 
-void FindDigits::print()
+void DigitFinder::print()
 {
 	Hlong digitCount = outlineDigits.CountObj();
 	std::cout << "A total of " << digitCount << " digits have been found!\n";

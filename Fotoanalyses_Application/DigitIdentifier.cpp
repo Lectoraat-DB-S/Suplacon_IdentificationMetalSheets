@@ -1,22 +1,22 @@
 //Identifying/Reading numbers
 
-#include "IdentifyDigits.h"
+#include "DigitIdentifier.h"
 
 using namespace HalconCpp;
 
-IdentifyDigits::IdentifyDigits(const char* fontName)
+DigitIdentifier::DigitIdentifier(const char* fontName)
 {
 	this->classifier = HOCRMlp(fontName);
 }
 
-IdentifyDigits::IdentifyDigits(HImage image, HRegion outlineNumbers, const char* fontName)
+DigitIdentifier::DigitIdentifier(HImage image, HRegion outlineNumbers, const char* fontName)
 {
 	this->image = image;
 	this->outlineDigits = outlineNumbers;
 	this->classifier = HOCRMlp(fontName);
 }
 
-bool IdentifyDigits::execute()
+bool DigitIdentifier::execute()
 {
 	HTuple row{}, column{};
 	HTuple area = outlineDigits.AreaCenter(&row, &column);
@@ -44,7 +44,7 @@ bool IdentifyDigits::execute()
 	return true;
 }
 
-bool IdentifyDigits::execute(HImage image, HRegion outlineNumbers)
+bool DigitIdentifier::execute(HImage image, HRegion outlineNumbers)
 {
 	this->image = image;
 	this->outlineDigits = outlineNumbers;
@@ -52,7 +52,7 @@ bool IdentifyDigits::execute(HImage image, HRegion outlineNumbers)
 	return execute();
 }
 
-void IdentifyDigits::print()
+void DigitIdentifier::print()
 {
 	Hlong digitCount = outlineDigits.CountObj();
 	if (digitCount > MAX_DIGITS)
