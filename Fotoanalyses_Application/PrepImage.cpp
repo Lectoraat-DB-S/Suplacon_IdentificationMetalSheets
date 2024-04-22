@@ -4,10 +4,15 @@
 
 using namespace HalconCpp;
 
+PrepImage::PrepImage()
+{
+	//Do nothing
+}
+
 PrepImage::PrepImage(HImage image)
 {
 	this->image = image;
-};
+}
 
 bool PrepImage::execute()
 {
@@ -22,12 +27,19 @@ bool PrepImage::execute()
 	image = image.InvertImage();
 
 	return true;
-};
+}
+
+bool PrepImage::execute(HImage image)
+{
+	this->image = image;
+
+	return execute();
+}
 
 void PrepImage::print()
 {
 	std::cout << "IMAGE_ZOOM: " << ZOOM_FACTOR << ", EMPHASIZE_FACTOR: " << EMPHASIZE_FACTOR << "\n";
-};
+}
 
 
 

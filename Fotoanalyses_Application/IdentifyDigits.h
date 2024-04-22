@@ -25,9 +25,11 @@ private:
 	FoundDigit foundDigits[MAX_DIGITS];
 
 public:
+	IdentifyDigits(const char* fontName);
 	IdentifyDigits(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
 
 	bool execute();
+	bool execute(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits);
 	void print();
 
 	FoundDigit* getFoundDigits() { return foundDigits; };

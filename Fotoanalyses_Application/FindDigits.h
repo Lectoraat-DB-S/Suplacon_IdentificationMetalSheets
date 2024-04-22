@@ -19,9 +19,11 @@ private:
 	HalconCpp::HRegion outlineDigits{};
 
 public:
+	FindDigits();
 	FindDigits(HalconCpp::HImage image);
 
 	bool execute();
+	bool execute(HalconCpp::HImage image);
 	void print();
 
 	HalconCpp::HRegion getOutlineDigits() { return outlineDigits; };

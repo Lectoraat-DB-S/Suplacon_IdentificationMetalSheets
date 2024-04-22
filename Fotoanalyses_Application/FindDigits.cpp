@@ -3,10 +3,15 @@
 
 using namespace HalconCpp;
 
+FindDigits::FindDigits()
+{
+	//Do nothing
+}
+
 FindDigits::FindDigits(HImage image)
 {
 	this->image = image;
-};
+}
 
 bool FindDigits::execute()
 {
@@ -20,6 +25,13 @@ bool FindDigits::execute()
 	outlineDigits = outlineDigits.SortRegion("first_point", "true", "column");
 
 	return true;
+}
+
+bool FindDigits::execute(HImage image)
+{
+	this->image = image;
+	
+	return execute();
 }
 
 void FindDigits::print()
