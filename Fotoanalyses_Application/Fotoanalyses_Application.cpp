@@ -1,6 +1,3 @@
-// Vision_Systeem.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #define PHOTO_NAME "Fotos_Plaatcodes/1.jpg" //"Fotos_Plaatcodes/4.jpg"
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 

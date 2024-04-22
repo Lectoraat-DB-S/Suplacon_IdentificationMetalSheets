@@ -1,0 +1,7 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Vision_Systeem.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  FindDigits.cpp
+  IdentifyDigits.cpp
+  PrepImage.cpp
+  Fotoanalyses_Application.cpp
+  Generating Code...
+  Vision_Systeem.vcxproj -> D:\Suplacon_IdentificationMetalSheets\Fotoanalyses_Application\x64\Debug\Fotoanalyses_Application.exe
