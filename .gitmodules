@@ -1,0 +1,3 @@
+[submodule "freeopcua"]
+	path = freeopcua
+	url = https://github.com/FreeOpcUa/freeopcua.git
