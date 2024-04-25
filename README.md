@@ -2,6 +2,31 @@
 Vision system for reading codes on metal scheets!
 This project is done in cooperation with Suplacon in Emmeloord.
 
+## Benodigde software
+- MVTec HALCON 23.11 Progress Student Edition 
+- Visual Studio 2019
+- GitHub Desktop
+- freeopcua
+
+### Installatie
+Stappenplan voor installeren benodigde software
+#### HALCON
+1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
+2. Doorloop de volgende studenthandleiding: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
+3. Installeer alle beschikbare packages, **behalve** *'xxx'*.
+
+#### Visual Studio 2019
+/
+
+#### GitHub Desktop
+1. /
+2. Clone deze repository
+
+#### freeopcua
+1. Navigeer binnen GitHub Desktop naar: 'Repository->'Open in Command Prompt'.
+2. ???
+
+
 # template-repository 🦾
 codering
 Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
