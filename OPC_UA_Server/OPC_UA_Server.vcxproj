@@ -93,14 +93,14 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <AdditionalIncludeDirectories>D:\open62541pp\include;D:\open62541pp\3rdparty\open62541\arch;D:\open62541pp\3rdparty\open62541\src;D:\open62541pp\3rdparty\open62541\arch\win32;D:\open62541pp\3rdparty\open62541\include;D:\open62541pp\3rdparty\open62541\plugins\include;D:\open62541pp\3rdparty\open62541\deps;D:\open62541pp\3rdparty\open62541\src\pubsub;D:\open62541pp\build\3rdparty\open62541\src_generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\open62541pp\include;..\open62541pp\3rdparty\open62541\arch;..\open62541pp\3rdparty\open62541\src;..\open62541pp\3rdparty\open62541\arch\win32;..\open62541pp\3rdparty\open62541\include;..\open62541pp\3rdparty\open62541\plugins\include;..\open62541pp\3rdparty\open62541\deps;..\open62541pp\3rdparty\open62541\src\pubsub;..\open62541pp\build\3rdparty\open62541\src_generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\open62541pp\build\bin\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>open62541pp.lib;open62541.lib;ws2_32.lib;iphlpapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\open62541pp\build\bin\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>open62541pp.lib;open62541.lib;ws2_32.lib;iphlpapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
