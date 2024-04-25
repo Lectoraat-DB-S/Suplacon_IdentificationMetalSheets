@@ -16,7 +16,7 @@ Stappenplan voor installeren benodigde software
 3. Installeer alle beschikbare packages, **behalve** *'xxx'*.
 
 #### Visual Studio 2019
-/
+1. Selecteer en installeer workload *'Desktop development with C++'*
 
 #### GitHub Desktop
 1. /
