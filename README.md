@@ -5,7 +5,7 @@ This project is done in cooperation with Suplacon in Emmeloord.
 ## Benodigde software
 - MVTec HALCON 23.11 Progress Student Edition 
 - Visual Studio 2019
-- GitHub Desktop
+- GitHub Desktop (Inclusief Git, CMake & Python3)
 - Open62541pp
 
 ### Installatie
