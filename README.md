@@ -40,7 +40,7 @@ ctest --output-on-failure
 ```
 4. Navigeer naar (REPO_ROOT)\open62541pp\build
 5. Start 'open62541++.sln' met Visual Studio
-6. Navigeer binnen Visual Studio naar 'Build'->'Build Solution'
+6. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
 
 
 # template-repository 
