@@ -1,4 +1,4 @@
-# Identification Metal Sheets
+# Identification Metal Sheets 🦾
 Vision system for reading codes on metal scheets!
 This project is done in cooperation with Suplacon in Emmeloord.
 
@@ -6,7 +6,7 @@ This project is done in cooperation with Suplacon in Emmeloord.
 - MVTec HALCON 23.11 Progress Student Edition 
 - Visual Studio 2019
 - GitHub Desktop
-- freeopcua
+- Open62541pp
 
 ### Installatie
 Stappenplan voor installeren benodigde software
@@ -22,12 +22,27 @@ Stappenplan voor installeren benodigde software
 1. /
 2. Clone deze repository
 
-#### freeopcua
-1. Navigeer binnen GitHub Desktop naar: 'Repository->'Open in Command Prompt'.
-2. ???
+#### Open62541pp
+2. Navigeer binnen GitHub Desktop naar: 'Repository'->'Open in Command Prompt'.
+3. Build de *open62541pp* repository met de volgende opdrachten:
+```
+# navigate
+cd open62541pp
+
+# build
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
+cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode
+
+# run tests
+ctest --output-on-failure
+```
+4. Navigeer naar (REPO_ROOT)\open62541pp\build
+5. Start 'open62541++.sln' met Visual Studio
+6. Navigeer binnen Visual Studio naar 'Build'->'Build Solution'
 
 
-# template-repository 🦾
+# template-repository 
 codering
 Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
 Deze README beschrijft het project, wat je nodig hebt om de code te gebruiken en hoe je de code kunt gebruiken. Uiteraard kan dit ietsje afwijken aan de hand van welke taal je hebt geprogrammeerd, maar blijf het liefst zo dicht bij mogelijk bij deze standaarden.
