@@ -1,30 +1,15 @@
-#include <iostream>
-
 #include "open62541pp/open62541pp.h"
 
 int main() {
-	opcua::Server server(4840 /* port */);
+    opcua::Server server;
 
-	server.setApplicationName("open62541pp server example");
-	server.setApplicationUri("urn:open62541pp.server.application");
-	server.setProductUri("https://open62541pp.github.io");
+    // Add a variable node to the Objects node
+    opcua::Node parentNode = server.getObjectsNode();
+    opcua::Node myIntegerNode = parentNode.addVariable({1, 1000}, "TheAnswer");
+    // Write some node attributes
+    myIntegerNode.writeDisplayName({"en-US", "The Answer"})
+        .writeDataType(opcua::DataTypeId::Int32)
+        .writeValueScalar(42);
 
-	// Add a variable node to the Objects node
-	auto parentNode = server.getObjectsNode();
-	auto myIntegerNode = parentNode.addVariable(
-		{ 1, "TheAnswer" },
-		"The Answer",
-		opcua::VariableAttributes{}
-		.setDisplayName({ "en-US", "The Answer" })
-		.setDescription({ "en-US", "Answer to the Ultimate Question of Life" })
-		.setDataType<int>()
-	);
-
-	// Write a value (attribute) to the node
-	myIntegerNode.writeValueScalar(42);
-
-	// Read the value (attribute) from the node
-	std::cout << "The answer is: " << myIntegerNode.readValueScalar<int>() << std::endl;
-
-	server.run();
+    server.run();
 }

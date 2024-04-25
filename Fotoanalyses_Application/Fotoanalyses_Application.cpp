@@ -14,7 +14,7 @@
 using namespace std;
 using namespace HalconCpp;
 
-int main()
+/*int main()
 {
 	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
 	camera.GrabImageStart(-1);
@@ -48,5 +48,18 @@ int main()
 	
 	camera.CloseFramegrabber();
 
-}
+}*/
 
+#include <iostream>
+
+#include "open62541pp/open62541pp.h"
+
+int main() {
+	opcua::Client client;
+	client.connect("opc.tcp://localhost:4840");
+
+	opcua::Node node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
+	const auto dt = node.readValueScalar<opcua::DateTime>();
+
+	std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
+}
