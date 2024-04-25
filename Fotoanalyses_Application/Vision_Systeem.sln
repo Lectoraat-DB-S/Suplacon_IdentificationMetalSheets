@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fotoanalyses_Application", "Vision_Systeem.vcxproj", "{3A7F179A-2930-4638-A035-3748636DAD76}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OPC_UA_Server", "..\OPC_UA_Server\open62541pp_examples_server.vcxproj", "{C225B1A9-8924-3DAB-8755-33E222D38AEA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OPC_UA_Server", "..\OPC_UA_Server\OPC_UA_Server.vcxproj", "{C225B1A9-8924-3DAB-8755-33E222D38AEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
