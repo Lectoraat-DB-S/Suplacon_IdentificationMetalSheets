@@ -2,12 +2,17 @@
 #define MAX_PHOTOCOUNT 7
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
-#define URL_OPCUA_SERVER "opc.tcp://LAPTOP-TCB5V9RI:4840"
+#define URL_OPCUA_SERVER "opc.tcp://DESKTOP-SISA661:4840"//"opc.tcp://LAPTOP-TCB5V9RI:4840"
 #define THEANSWER_NODEID 1000
 
+#include <iomanip>
 #include <iostream>
+#include <string_view>
+#include <chrono>
+#include <thread>
 
 #include "HalconCpp.h"
+#include "open62541pp/open62541pp.h"
 
 #include "ImagePrepper.h"
 #include "DigitFinder.h"
@@ -16,7 +21,7 @@
 using namespace std;
 using namespace HalconCpp;
 
-/*int main()
+int main()
 {
 	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
 	camera.GrabImageStart(-1);
@@ -25,7 +30,14 @@ using namespace HalconCpp;
 	DigitFinder finder = DigitFinder();
 	DigitIdentifier identifier = DigitIdentifier(OCR_FONT_NAME);
 
-	byte photocounter = 0;
+	opcua::Client client;
+	client.connect(URL_OPCUA_SERVER);
+
+	auto nodeAnswer = client.getRootNode().browseChild({ {0, "Objects"}, {1, "TheAnswer"} });
+	std::cout << nodeAnswer.readDisplayName().getText() << "\n";
+	std::cout << nodeAnswer.getNodeId().toString() << "\n";
+
+	BYTE photocounter = 0;
 	while (photocounter < MAX_PHOTOCOUNT)
 	{
 		HImage image = camera.GrabImageAsync(-1);
@@ -42,23 +54,19 @@ using namespace HalconCpp;
 		identifier.execute(preppedImage, outlineDigits);
 		identifier.print();
 		Digit* number = identifier.getFoundDigits();
-		
-		//Do something with 'number'
+
+		nodeAnswer.writeValueScalar(number[0].value);
+		auto value = nodeAnswer.readDataValue().getValue().getScalarCopy<std::string>();
+		std::cout << "The answer is: [" << value << "]!\n";
 
 		photocounter++;
+
+		std::cin.get();
 	}
 	
 	camera.CloseFramegrabber();
 
-}*/
-
-#include <iomanip>
-#include <iostream>
-#include <string_view>
-#include <chrono>
-#include <thread>
-
-#include "open62541pp/open62541pp.h"
+}
 
 /// Get name of node class.
 constexpr std::string_view getEnumName(opcua::NodeClass nodeClass) {
@@ -118,7 +126,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     }
 }
 
-int main() {
+/*int main() {
     opcua::Client client;
     client.connect(URL_OPCUA_SERVER);
 
@@ -144,7 +152,7 @@ int main() {
     nodeAnswer.writeValueScalar(1);
     auto value = nodeAnswer.readDataValue().getValue().getScalarCopy<INT32>();
     std::cout << "The answer is: [" << value << "]!\n";
-}
+}*/
 
 /*int main() {
     opcua::Client client;
