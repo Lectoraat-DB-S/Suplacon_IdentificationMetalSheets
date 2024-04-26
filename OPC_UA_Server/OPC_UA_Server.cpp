@@ -9,8 +9,8 @@ int main() {
 		opcua::VariableAttributes{}.setAccessLevel(opcua::AccessLevel::CurrentRead | opcua::AccessLevel::CurrentWrite));
     // Write some node attributes
     myIntegerNode.writeDisplayName({"en-US", "The Answer"})
-        .writeDataType(opcua::DataTypeId::Int32)
-        .writeValueScalar(42);
+        .writeDataType(opcua::DataTypeId::String)
+        .writeValueScalar("0123456789");
 
     server.run();
 }

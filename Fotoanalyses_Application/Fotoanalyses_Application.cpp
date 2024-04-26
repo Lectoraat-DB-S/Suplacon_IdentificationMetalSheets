@@ -154,7 +154,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     std::cout << "The answer is: [" << value << "]!\n";
 }*/
 
-/*int main() {
+int main() {
     opcua::Client client;
 
     // Add a state callback (session activated) to create subscription(s) and monitored items(s) in
@@ -185,10 +185,9 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
                     << "- node id:           " << item.getNodeId().toString() << "\n"
                     << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
-                char buffer[10];
-                const auto dt = value.getValue().getScalarCopy<INT32>();
+                const auto dt = value.getValue().getScalarCopy<std::string>();
                 //std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
-                std::cout << itoa(dt, buffer, 10) << std::endl;
+                std::cout << dt << std::endl;
             }
         );
 
@@ -216,4 +215,4 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
             std::this_thread::sleep_for(std::chrono::seconds(3));
         }
     }
-}*/
+}
