@@ -3,6 +3,8 @@
 #define AQUISITION_DELAY
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
+#define URL_OPCUA_SERVER "opc.tcp://DESKTOP-SISA661:4840"
+
 #include <iostream>
 
 #include "HalconCpp.h"
@@ -56,7 +58,8 @@ using namespace HalconCpp;
 
 int main() {
 	opcua::Client client;
-	client.connect("opc.tcp://localhost:4840");
+	//client.connect("opc.tcp://localhost:4840");
+	client.connect("opc.tcp://DESKTOP-SISA661:4840");
 
 	opcua::Node node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
 	const auto dt = node.readValueScalar<opcua::DateTime>();
