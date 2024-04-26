@@ -1,7 +1,7 @@
 #include "open62541pp/open62541pp.h"
 
 int main() {
-    opcua::Server server(4840);
+    opcua::Server server(4840 /* port */);
 
     // Add a variable node to the Objects node
     opcua::Node parentNode = server.getObjectsNode();
