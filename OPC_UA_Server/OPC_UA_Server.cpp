@@ -8,7 +8,7 @@ int main() {
 	opcua::Node myIntegerNode = parentNode.addVariable({ 1, 1000 }, "TheAnswer", 
 		opcua::VariableAttributes{}.setAccessLevel(opcua::AccessLevel::CurrentRead | opcua::AccessLevel::CurrentWrite));
     // Write some node attributes
-    myIntegerNode.writeDisplayName({"en-US", "The Answer"})
+    myIntegerNode.writeDisplayName({"en-US", "Programnumber"})
         .writeDataType(opcua::DataTypeId::String)
         .writeValueScalar("0123456789");
 

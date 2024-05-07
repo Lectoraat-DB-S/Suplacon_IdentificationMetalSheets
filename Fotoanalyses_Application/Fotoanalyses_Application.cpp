@@ -2,7 +2,7 @@
 #define MAX_PHOTOCOUNT 7
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
-#define URL_OPCUA_SERVER "opc.tcp://DESKTOP-SISA661:4840"//"opc.tcp://LAPTOP-TCB5V9RI:4840"
+#define URL_OPCUA_SERVER "opc.tcp://LAPTOP-TCB5V9RI:4840" //"opc.tcp://DESKTOP-SISA661:4840"
 #define THEANSWER_NODEID 1000
 
 #include <iomanip>
@@ -34,8 +34,9 @@ int main()
 	client.connect(URL_OPCUA_SERVER);
 
 	auto nodeAnswer = client.getRootNode().browseChild({ {0, "Objects"}, {1, "TheAnswer"} });
-	std::cout << nodeAnswer.readDisplayName().getText() << "\n";
-	std::cout << nodeAnswer.getNodeId().toString() << "\n";
+	std::cout << "Node Name: \"" << nodeAnswer.readDisplayName().getText() << "\"\n";
+	std::cout << "Node ID: (" << nodeAnswer.getNodeId().toString() << ")\n";
+	std::cout << "Node Value: [" << nodeAnswer.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
 
 	BYTE photocounter = 0;
 	while (photocounter < MAX_PHOTOCOUNT)
@@ -55,9 +56,10 @@ int main()
 		identifier.print();
 		Digit* number = identifier.getFoundDigits();
 
+
 		nodeAnswer.writeValueScalar(number[0].value);
 		auto value = nodeAnswer.readDataValue().getValue().getScalarCopy<std::string>();
-		std::cout << "The answer is: [" << value << "]!\n";
+		std::cout << "The following digit has been received: [" << value << "]!\n";
 
 		photocounter++;
 
@@ -154,7 +156,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     std::cout << "The answer is: [" << value << "]!\n";
 }*/
 
-int main() {
+/*int main() {
     opcua::Client client;
 
     // Add a state callback (session activated) to create subscription(s) and monitored items(s) in
@@ -215,4 +217,4 @@ int main() {
             std::this_thread::sleep_for(std::chrono::seconds(3));
         }
     }
-}
+}*/
