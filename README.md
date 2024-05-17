@@ -1,5 +1,5 @@
-# Identification Metal Sheets 🦾
-Vision system for reading codes on metal scheets!
+# Identification Metal Plates (IDM) 🦾
+Vision system for reading codes on metal plates!
 This project is done in cooperation with Suplacon in Emmeloord.
 
 ## Benodigde software
