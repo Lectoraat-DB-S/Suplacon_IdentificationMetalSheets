@@ -12,31 +12,36 @@
 #include "DigitFinder.h"
 #include "DigitIdentifier.h"
 
-using namespace std;
+#include "OPC_UA_Settings.h"
+
 using namespace HalconCpp;
+using namespace opcua;
 
 int main()
 {
 	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
-	camera.GrabImageStart(-1);
-
 	ImagePrepper prepper = ImagePrepper();
 	DigitFinder finder = DigitFinder();
 	DigitIdentifier identifier = DigitIdentifier(OCR_FONT_NAME);
 
-	opcua::Client client;
-	client.connect(URL_OPCUA_SERVER);
+	Client client;
+	client.connect(URL_OPC_UA_SERVER);
 
-	auto nodeAnswer = client.getRootNode().browseChild({ {0, "Objects"}, {1, "TheAnswer"} });
-	std::cout << "Node Name: \"" << nodeAnswer.readDisplayName().getText() << "\"\n";
-	std::cout << "Node ID: (" << nodeAnswer.getNodeId().toString() << ")\n";
-	std::cout << "Node Value: [" << nodeAnswer.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
+	auto nodeProgramnumber = client.getRootNode().browseChild({ {OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME}, {PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
+	std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
+	std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
+	std::cout << "ID: (" << nodeProgramnumber.getNodeId().toString() << ")\n";
+	std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
+	std::cout << "---End Information---\n";
+
+	std::cout << "---Start image acquisition---\n";
+	camera.GrabImageStart(-1);
 
 	BYTE photocounter = 0;
 	while (photocounter < MAX_PHOTOCOUNT)
 	{
 		HImage image = camera.GrabImageAsync(-1);
-		cout << "New image acquired!\n";
+		std::cout << "New image acquired!\n";
 
 		prepper.execute(image);
 		prepper.print();
@@ -50,15 +55,16 @@ int main()
 		identifier.print();
 		Digit* number = identifier.getFoundDigits();
 
-
-		nodeAnswer.writeValueScalar(number[0].value);
-		auto value = nodeAnswer.readDataValue().getValue().getScalarCopy<std::string>();
+		nodeProgramnumber.writeValueScalar(number[0].value);
+		auto value = nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>();
 		std::cout << "The following digit has been received: [" << value << "]!\n";
 
 		photocounter++;
 
+		std::cout << "Press ENTER to continue...";
 		std::cin.get();
 	}
 	
 	camera.CloseFramegrabber();
+	std::cout << "---End image acquisition---\n";
 }
