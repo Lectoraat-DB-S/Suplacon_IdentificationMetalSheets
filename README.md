@@ -1,25 +1,49 @@
-# Identification Metal Sheets
-Vision system for reading codes on metal scheets!
+# Identification Metal Plates (IDM) 🦾
+Vision system for reading codes on metal plates!
 This project is done in cooperation with Suplacon in Emmeloord.
 
 ## Benodigde software
 - MVTec HALCON 23.11 Progress Student Edition 
-- Driver
-- OPC UA Server
+- Visual Studio 2019
+- GitHub Desktop (Inclusief Git, CMake & Python3)
+- Open62541pp
 
 ### Installatie
 Stappenplan voor installeren benodigde software
 #### HALCON
 1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
 2. Doorloop de volgende studenthandleiding: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
-3. Installeer alle beschikbare packages, **behalve** *'Variable Inspect Extension for Visual Studio'*.
+3. Installeer alle beschikbare packages, **behalve** *'xxx'*.
 
-#### Driver
+#### Visual Studio 2019
+1. Selecteer en installeer workload *'Desktop development with C++'*
+2. ~~Start de PC opnieuw op~~
 
-#### OPC UA Server
+#### GitHub Desktop
+1. /
+2. Clone deze repository
+
+#### Open62541pp
+2. Navigeer binnen GitHub Desktop naar: 'Repository'->'Open in Command Prompt'.
+3. Build de *open62541pp* repository met de volgende opdrachten:
+```
+# navigate
+cd open62541pp
+
+# build
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
+cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode
+
+# run tests
+ctest --output-on-failure
+```
+4. Navigeer naar (REPO_ROOT)\open62541pp\build
+5. Start 'open62541++.sln' met Visual Studio
+6. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
 
 
-# template-repository 🦾
+# template-repository 
 codering
 Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
 Deze README beschrijft het project, wat je nodig hebt om de code te gebruiken en hoe je de code kunt gebruiken. Uiteraard kan dit ietsje afwijken aan de hand van welke taal je hebt geprogrammeerd, maar blijf het liefst zo dicht bij mogelijk bij deze standaarden.

@@ -1,5 +1,5 @@
-#ifndef FIND_DIGITS_H
-#define FIND_DIGITS_H
+#ifndef DIGITFINDER_H
+#define DIGITFINDER_H
 
 #define FINDER_MASK_SIZE 15
 #define STD_DEV_SCALE 0.2
