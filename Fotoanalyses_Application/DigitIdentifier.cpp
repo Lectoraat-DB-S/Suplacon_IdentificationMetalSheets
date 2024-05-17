@@ -4,6 +4,11 @@
 
 using namespace HalconCpp;
 
+DigitIdentifier::DigitIdentifier()
+{
+	//Do nothing
+}
+
 DigitIdentifier::DigitIdentifier(const char* fontName)
 {
 	this->classifier = HOCRMlp(fontName);
@@ -48,7 +53,7 @@ bool DigitIdentifier::execute(HImage image, HRegion outlineNumbers)
 {
 	this->image = image;
 	this->outlineDigits = outlineNumbers;
-
+	
 	return execute();
 }
 

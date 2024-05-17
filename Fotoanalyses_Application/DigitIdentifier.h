@@ -25,6 +25,7 @@ private:
 	Digit foundDigits[MAX_DIGITS];
 
 public:
+	DigitIdentifier();
 	DigitIdentifier(const char* fontName);
 	DigitIdentifier(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits, const char* fontName);
 
@@ -32,7 +33,9 @@ public:
 	bool execute(HalconCpp::HImage image, HalconCpp::HRegion outlineDigits);
 	void print();
 
+	void setFontName(const char* fontName) { this->classifier = HalconCpp::HOCRMlp(fontName); }
 	Digit* getFoundDigits() { return foundDigits; };
+
 };
 
 #endif

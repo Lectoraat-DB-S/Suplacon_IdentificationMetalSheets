@@ -7,7 +7,7 @@ using namespace opcua;
 int main() {
 	Server server(PORT_OPC_UA_SERVER);
 
-	// Add a programnumber node to the Objects node
+	// Add a Programnumber node to the Objects node
 	Node parentNode = server.getObjectsNode();
 	Node myIntegerNode = parentNode.addVariable(
 		{ PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_ID },
