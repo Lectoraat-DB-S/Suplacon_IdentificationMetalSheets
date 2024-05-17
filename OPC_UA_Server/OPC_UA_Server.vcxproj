@@ -160,6 +160,9 @@
   <ItemGroup>
     <ClCompile Include="OPC_UA_Server.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Fotoanalyses_Application\OPC_UA_Settings.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

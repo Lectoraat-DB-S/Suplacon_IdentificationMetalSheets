@@ -2,9 +2,6 @@
 #define MAX_PHOTOCOUNT 7
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
-#define URL_OPCUA_SERVER "opc.tcp://LAPTOP-TCB5V9RI:4840" //"opc.tcp://DESKTOP-SISA661:4840"
-#define THEANSWER_NODEID 1000
-
 #include <iomanip>
 #include <iostream>
 

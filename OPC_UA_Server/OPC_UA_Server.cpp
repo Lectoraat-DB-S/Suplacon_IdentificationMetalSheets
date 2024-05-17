@@ -1,16 +1,25 @@
 #include "open62541pp/open62541pp.h"
 
+#include "..//Fotoanalyses_Application/OPC_UA_Settings.h"
+
+using namespace opcua;
+
 int main() {
-    opcua::Server server(4840 /* port */);
+	Server server(PORT_OPC_UA_SERVER);
 
-    // Add a variable node to the Objects node
-    opcua::Node parentNode = server.getObjectsNode();
-	opcua::Node myIntegerNode = parentNode.addVariable({ 1, 1000 }, "TheAnswer", 
-		opcua::VariableAttributes{}.setAccessLevel(opcua::AccessLevel::CurrentRead | opcua::AccessLevel::CurrentWrite));
-    // Write some node attributes
-    myIntegerNode.writeDisplayName({"en-US", "Programnumber"})
-        .writeDataType(opcua::DataTypeId::String)
-        .writeValueScalar("0123456789");
+	// Add a programnumber node to the Objects node
+	Node parentNode = server.getObjectsNode();
+	Node myIntegerNode = parentNode.addVariable(
+		{ PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_ID },
+		PROGRAMNUMBER_NODE_NAME,
+		VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite));
 
-    server.run();
+	// Write node attributes
+	myIntegerNode
+		.writeDisplayName({ PROGRAMNUMBER_NODE_LANGUAGE, PROGRAMNUMBER_NODE_DISPLAYNAME })
+		.writeDescription({ PROGRAMNUMBER_NODE_LANGUAGE, PROGRAMNUMBER_NODE_DESCRIPTION })
+		.writeDataType(DataTypeId::String)
+		.writeValueScalar(PROGRAMNUMBER_NODE_BASEVALUE);
+
+	server.run();
 }
