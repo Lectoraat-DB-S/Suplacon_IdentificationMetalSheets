@@ -17,54 +17,143 @@
 using namespace HalconCpp;
 using namespace opcua;
 
+enum ApplicationStatus
+{
+	None,
+	InitializingObjects,
+	ConnectingToServer,
+	WritingToNode,
+	StartingImageAquisition,
+	AquiringImage,
+	EndingImageAquisition,
+	PreppingImage,
+	FindingDigits,
+	IdentifyingDigits,
+	WaitingForInput,
+};
+
 int main()
 {
-	HFramegrabber camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
-	ImagePrepper prepper = ImagePrepper();
-	DigitFinder finder = DigitFinder();
-	DigitIdentifier identifier = DigitIdentifier(OCR_FONT_NAME);
-
+	HFramegrabber camera;
+	ImagePrepper prepper;
+	DigitFinder finder;
+	DigitIdentifier identifier;
 	Client client;
-	client.connect(URL_OPC_UA_SERVER);
 
-	auto nodeProgramnumber = client.getRootNode().browseChild({ {OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME}, {PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
-	std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
-	std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
-	std::cout << "ID: (" << nodeProgramnumber.getNodeId().toString() << ")\n";
-	std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
-	std::cout << "---End Information---\n";
-
-	std::cout << "---Start image acquisition---\n";
-	camera.GrabImageStart(-1);
-
+	HImage image;
 	BYTE photocounter = 0;
-	while (photocounter < MAX_PHOTOCOUNT)
+
+	ApplicationStatus currentStatus = InitializingObjects;
+	bool unknownStatus = false;
+
+	while (!unknownStatus)
 	{
-		HImage image = camera.GrabImageAsync(-1);
-		std::cout << "New image acquired!\n";
+		switch (currentStatus)
+		{
+		case InitializingObjects:
+		{
+			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
+			identifier = DigitIdentifier(OCR_FONT_NAME);
 
-		prepper.execute(image);
-		prepper.print();
-		HImage preppedImage = prepper.getImage();
+			currentStatus = ConnectingToServer;
+		}
+		break;
+		case ConnectingToServer:
+		{
+			client.connect(URL_OPC_UA_SERVER);
 
-		finder.execute(preppedImage);
-		finder.print();
-		HRegion outlineDigits = finder.getOutlineDigits();
+			Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
+				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
+				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
+			std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
+			std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
+			std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
+			std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
+			std::cout << "---End Information---\n";
 
-		identifier.execute(preppedImage, outlineDigits);
-		identifier.print();
-		Digit* number = identifier.getFoundDigits();
+			currentStatus = StartingImageAquisition;
+		}
+		break;
+		case WritingToNode:
+		{
+			Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
+				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
+				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
+			std::string foundProgramnumber = identifier.GetFoundNumber();
 
-		nodeProgramnumber.writeValueScalar(number[0].value);
-		auto value = nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>();
-		std::cout << "The following digit has been received: [" << value << "]!\n";
+			nodeProgramnumber.writeValueScalar(foundProgramnumber);
+			std::string value = nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>();
+			std::cout << "The programnumber [" << value << "] has been send to & received by the server!\n";
 
-		photocounter++;
+			currentStatus = WaitingForInput;
+		}
+		break;
+		case StartingImageAquisition:
+		{
+			std::cout << "Starting image acquisition...\n";
+			camera.GrabImageStart(-1);
+			currentStatus = AquiringImage;
+		}
+		break;
+		case AquiringImage:
+		{
+			photocounter++;
 
-		std::cout << "Press ENTER to continue...";
-		std::cin.get();
+			if (photocounter <= MAX_PHOTOCOUNT)
+			{
+				image = camera.GrabImageAsync(-1);
+				std::cout << "New image acquired!\n";
+				currentStatus = PreppingImage;
+			}
+			else
+				currentStatus = EndingImageAquisition;
+		}
+		break;
+		case EndingImageAquisition:
+		{
+			camera.CloseFramegrabber();
+			std::cout << "Ending image acquisition...\n";
+			currentStatus = None;
+		}
+		break;
+		case PreppingImage:
+		{
+			prepper.execute(image);
+			prepper.print();
+			currentStatus = FindingDigits;
+		}
+		break;
+		case FindingDigits:
+		{
+			finder.execute(prepper.getImage());
+			finder.print();
+			currentStatus = IdentifyingDigits;
+		}
+		break;
+		case IdentifyingDigits:
+		{
+			identifier.execute(prepper.getImage(), finder.getOutlineDigits());
+			identifier.print();
+			currentStatus = WritingToNode;
+		}
+		break;
+		case WaitingForInput:
+		{
+			std::cout << "Press ENTER to take a new photo...";
+
+			char input = '0';
+			while (input != '\n')
+				input = std::cin.get();
+
+			currentStatus = AquiringImage;
+		}
+		break;
+		default:
+		{
+			unknownStatus = true;
+			std::cout << "Shutting down Fotoanalyses Application...\n";
+		}
+		break;
+		}
 	}
-	
-	camera.CloseFramegrabber();
-	std::cout << "---End image acquisition---\n";
 }
