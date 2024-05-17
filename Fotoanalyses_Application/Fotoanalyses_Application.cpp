@@ -67,7 +67,7 @@ int main()
 				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
 			std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
 			std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
-			std::cout << "ID: (" << nodeProgramnumber.getNodeId().toString() << ")\n";
+			std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
 			std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
 			std::cout << "---End Information---\n";
 
@@ -79,11 +79,11 @@ int main()
 			Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
 				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
 				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
-			Digit* number = identifier.getFoundDigits();
+			std::string foundProgramnumber = identifier.GetFoundNumber();
 
-			nodeProgramnumber.writeValueScalar(number[0].value);
+			nodeProgramnumber.writeValueScalar(foundProgramnumber);
 			std::string value = nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>();
-			std::cout << "The following digit has been received by the server: [" << value << "]!\n";
+			std::cout << "The programnumber [" << value << "] has been send to & received by the server!\n";
 
 			currentStatus = WaitingForInput;
 		}
