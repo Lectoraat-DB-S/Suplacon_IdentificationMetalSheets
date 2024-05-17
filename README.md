@@ -1,11 +1,11 @@
-# Identification Metal Sheets 🦾
-Vision system for reading codes on metal scheets!
+# Identification Metal Plates (IDM) 🦾
+Vision system for reading codes on metal plates!
 This project is done in cooperation with Suplacon in Emmeloord.
 
 ## Benodigde software
 - MVTec HALCON 23.11 Progress Student Edition 
 - Visual Studio 2019
-- GitHub Desktop
+- GitHub Desktop (Inclusief Git, CMake & Python3)
 - Open62541pp
 
 ### Installatie
@@ -16,7 +16,8 @@ Stappenplan voor installeren benodigde software
 3. Installeer alle beschikbare packages, **behalve** *'xxx'*.
 
 #### Visual Studio 2019
-/
+1. Selecteer en installeer workload *'Desktop development with C++'*
+2. ~~Start de PC opnieuw op~~
 
 #### GitHub Desktop
 1. /
@@ -39,7 +40,7 @@ ctest --output-on-failure
 ```
 4. Navigeer naar (REPO_ROOT)\open62541pp\build
 5. Start 'open62541++.sln' met Visual Studio
-6. Navigeer binnen Visual Studio naar 'Build'->'Build Solution'
+6. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
 
 
 # template-repository 
