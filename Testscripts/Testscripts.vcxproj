@@ -20,11 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{3A7F179A-2930-4638-A035-3748636DAD76}</ProjectGuid>
+    <ProjectGuid>{7383554A-5589-4380-B5D4-CA3C01EFAAA0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Fotoanalyses_Application</RootNamespace>
+    <RootNamespace>Testscripts</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Fotoanalyses_Application</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -45,7 +44,6 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -67,7 +65,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="DebugPropertySheet.props" />
+    <Import Project="..\Fotoanalyses_Application\DebugPropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -104,21 +102,15 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp;..\open62541pp\include;..\open62541pp\3rdparty\open62541\arch;..\open62541pp\3rdparty\open62541\src;..\open62541pp\3rdparty\open62541\arch\win32;..\open62541pp\3rdparty\open62541\include;..\open62541pp\3rdparty\open62541\plugins\include;..\open62541pp\3rdparty\open62541\deps;..\open62541pp\3rdparty\open62541\src\pubsub;..\open62541pp\build\3rdparty\open62541\src_generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(HALCONROOT)\lib\$(HALCONARCH);..\open62541pp\build\bin\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>halconcpp.lib;open62541pp.lib;open62541.lib;ws2_32.lib;iphlpapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>libcmt.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -160,16 +152,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DigitFinder.cpp" />
-    <ClCompile Include="DigitIdentifier.cpp" />
-    <ClCompile Include="ImagePrepper.cpp" />
-    <ClCompile Include="Fotoanalyses_Application.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DigitFinder.h" />
-    <ClInclude Include="DigitIdentifier.h" />
-    <ClInclude Include="ImagePrepper.h" />
-    <ClInclude Include="OPC_UA_Settings.h" />
+    <ClCompile Include="..\Fotoanalyses_Application\DigitFinder.cpp" />
+    <ClCompile Include="..\Fotoanalyses_Application\DigitIdentifier.cpp" />
+    <ClCompile Include="..\Fotoanalyses_Application\ImagePrepper.cpp" />
+    <ClCompile Include="Testscripts.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

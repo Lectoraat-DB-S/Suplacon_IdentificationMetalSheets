@@ -1,6 +1,17 @@
-#define PHOTOSROOT "../Testfotos_Plaatcodes/Original"
-#define MAX_PHOTOCOUNT 7
+#define TESTPHOTOS_ROOT "../Testfotos_Plaatcodes/Original"
+#define MAX_PHOTOCOUNT 2
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
+
+//Constants used for configuring the testscripts
+#define NUMBERS_ON_TESTPHOTOS {"1963814007", "1963814005"} 
+
+#define STORAGE_RESULTPHOTOS_ROOT "../Testfotos_Plaatcodes"
+#define LOCATION_PERFORMANCE_RESULTPHOTOS "/Performance"
+
+#define RUN_PERFORMANCE_TESTS true
+#define RUN_FUNCTIONAL_TESTS false
+#define RUN_UNITTESTS false
+//--- --- ---
 
 #include <iomanip>
 #include <iostream>
@@ -8,11 +19,10 @@
 #include "HalconCpp.h"
 #include "open62541pp/open62541pp.h"
 
-#include "ImagePrepper.h"
-#include "DigitFinder.h"
-#include "DigitIdentifier.h"
-
-#include "OPC_UA_Settings.h"
+#include "../Fotoanalyses_Application/ImagePrepper.h"
+#include "../Fotoanalyses_Application/DigitFinder.h"
+#include "../Fotoanalyses_Application/DigitIdentifier.h"
+#include "../Fotoanalyses_Application/OPC_UA_Settings.h"
 
 using namespace HalconCpp;
 using namespace opcua;
@@ -30,9 +40,16 @@ enum ApplicationStatus
 	FindingDigits,
 	IdentifyingDigits,
 	WaitingForInput,
+
+	//Extra statuses for testing purposes
+	SavingTestresult,
+	ShowingTestresults,
+	ExportingTestresults,
+	FinishedTesting
+	//--- --- ---
 };
 
-int main()
+void executePerformanceTests()
 {
 	HFramegrabber camera;
 	ImagePrepper prepper;
@@ -46,13 +63,56 @@ int main()
 	ApplicationStatus currentStatus = InitializingObjects;
 	bool unknownStatus = false;
 
+	//Addition Performance Testing
+	std::string expectedNumbers[] = NUMBERS_ON_TESTPHOTOS;
+	std::string foundNumbers[MAX_PHOTOCOUNT];
+	//--- --- ---
+
 	while (!unknownStatus)
 	{
+		//Addition Performance Testing
+		if (currentStatus == WaitingForInput)
+			currentStatus = SavingTestresult;
+		else if(currentStatus == None)
+			currentStatus = ShowingTestresults;
+		//--- --- ---
+
 		switch (currentStatus)
 		{
+
+		//Addition Performance Testing
+		case SavingTestresult:
+		{
+			std::cout << "Saving testresult...\n";
+			foundNumbers[photocounter - 1] = identifier.GetFoundNumber();
+			currentStatus = AquiringImage;
+		}
+		break;
+		case ShowingTestresults:
+		{
+			std::cout << "---Results Performance Test---\n";
+			for (UINT16 i = 1; i <= MAX_PHOTOCOUNT; i++)
+			{
+				std::cout << "Photo ID: " << i
+					<< ", Expected: " << expectedNumbers[i - 1]
+					<< ", Found: " << foundNumbers[i - 1]
+					<< ", Is Match? " << ((expectedNumbers[i - 1] == foundNumbers[i - 1]) ? "YES" : "NO")
+					<< "\n";
+			}
+			std::cout << "---End Performance Test---\n";
+			currentStatus = ExportingTestresults;
+		}
+		break;
+		case ExportingTestresults:
+		{
+			currentStatus = FinishedTesting;
+		}
+		break;
+		//--- --- ---
+
 		case InitializingObjects:
 		{
-			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
+			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", TESTPHOTOS_ROOT, "default", 1, -1);
 			identifier = DigitIdentifier(OCR_FONT_NAME);
 
 			currentStatus = ConnectingToServer;
@@ -62,15 +122,6 @@ int main()
 		{
 			try {
 				client.connect(URL_OPC_UA_SERVER);
-
-				Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
-				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
-				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
-				std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
-				std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
-				std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
-				std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
-				std::cout << "---End Information---\n";
 
 				currentStatus = StartingImageAquisition;
 			}
@@ -164,3 +215,12 @@ int main()
 		}
 	}
 }
+
+int main()
+{
+	if (RUN_PERFORMANCE_TESTS)
+	{
+		executePerformanceTests();
+	}
+}
+
