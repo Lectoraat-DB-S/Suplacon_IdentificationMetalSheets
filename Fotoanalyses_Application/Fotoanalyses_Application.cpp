@@ -60,18 +60,25 @@ int main()
 		break;
 		case ConnectingToServer:
 		{
-			client.connect(URL_OPC_UA_SERVER);
+			try {
+				client.connect(URL_OPC_UA_SERVER);
 
-			Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
+				Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
 				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
 				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
-			std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
-			std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
-			std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
-			std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
-			std::cout << "---End Information---\n";
+				std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
+				std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
+				std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
+				std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
+				std::cout << "---End Information---\n";
 
-			currentStatus = StartingImageAquisition;
+				currentStatus = StartingImageAquisition;
+			}
+			catch (const opcua::BadStatus& e) {
+				client.disconnect();
+				std::cout << "Error: " << e.what() << "\nRetry to connect in 3 seconds\n";
+				std::this_thread::sleep_for(std::chrono::seconds(3));
+			}
 		}
 		break;
 		case WritingToNode:
