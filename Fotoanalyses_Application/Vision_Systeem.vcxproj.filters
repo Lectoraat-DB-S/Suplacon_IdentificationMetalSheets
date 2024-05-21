@@ -41,5 +41,8 @@
     <ClInclude Include="OPC_UA_Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Fotoanalyses_Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

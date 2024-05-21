@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="DigitFinder.h" />
     <ClInclude Include="DigitIdentifier.h" />
+    <ClInclude Include="Fotoanalyses_Settings.h" />
     <ClInclude Include="ImagePrepper.h" />
     <ClInclude Include="OPC_UA_Settings.h" />
   </ItemGroup>

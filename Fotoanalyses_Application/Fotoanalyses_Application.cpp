@@ -1,9 +1,7 @@
-#define PHOTOSROOT "../Testfotos_Plaatcodes/Original"
-#define MAX_PHOTOCOUNT 7
-#define OCR_FONT_NAME "Industrial_0-9_NoRej"
-
 #include <iomanip>
 #include <iostream>
+
+#include "Fotoanalyses_Settings.h"
 
 #include "HalconCpp.h"
 #include "open62541pp/open62541pp.h"
@@ -16,21 +14,6 @@
 
 using namespace HalconCpp;
 using namespace opcua;
-
-enum ApplicationStatus
-{
-	None,
-	InitializingObjects,
-	ConnectingToServer,
-	WritingToNode,
-	StartingImageAquisition,
-	AquiringImage,
-	EndingImageAquisition,
-	PreppingImage,
-	FindingDigits,
-	IdentifyingDigits,
-	WaitingForInput,
-};
 
 int main()
 {

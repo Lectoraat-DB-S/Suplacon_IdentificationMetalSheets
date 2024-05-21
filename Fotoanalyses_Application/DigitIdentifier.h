@@ -37,6 +37,8 @@ public:
 	void print();
 
 	void setFontName(const char* fontName) { this->classifier = HalconCpp::HOCRMlp(fontName); }
+	HalconCpp::HImage getImage() { return image; };
+	HalconCpp::HRegion getOutlineDigits() { return outlineDigits; };
 	Digit* getFoundDigits() { return foundDigits; };
 
 };

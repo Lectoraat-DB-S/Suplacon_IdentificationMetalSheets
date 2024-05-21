@@ -1,55 +1,13 @@
-#define TESTPHOTOS_ROOT "../Testfotos_Plaatcodes/Original"
-#define MAX_PHOTOCOUNT 2
-#define OCR_FONT_NAME "Industrial_0-9_NoRej"
-
-//Constants used for configuring the testscripts
-#define NUMBERS_ON_TESTPHOTOS {"1963814007", "1963814005"} 
-
-#define STORAGE_RESULTPHOTOS_ROOT "../Testfotos_Plaatcodes"
-#define LOCATION_PERFORMANCE_RESULTPHOTOS "/Performance"
-
-#define RUN_PERFORMANCE_TESTS true
-#define RUN_FUNCTIONAL_TESTS false
-#define RUN_UNITTESTS false
+//Used for configuring the testscript
+#include "Testscript_Settings.h"
 //--- --- ---
 
-#include <iomanip>
-#include <iostream>
-
-#include "HalconCpp.h"
-#include "open62541pp/open62541pp.h"
-
-#include "../Fotoanalyses_Application/ImagePrepper.h"
-#include "../Fotoanalyses_Application/DigitFinder.h"
-#include "../Fotoanalyses_Application/DigitIdentifier.h"
-#include "../Fotoanalyses_Application/OPC_UA_Settings.h"
+#include "Fotoanalyses_Settings.h"
 
 using namespace HalconCpp;
 using namespace opcua;
 
-enum ApplicationStatus
-{
-	None,
-	InitializingObjects,
-	ConnectingToServer,
-	WritingToNode,
-	StartingImageAquisition,
-	AquiringImage,
-	EndingImageAquisition,
-	PreppingImage,
-	FindingDigits,
-	IdentifyingDigits,
-	WaitingForInput,
-
-	//Extra statuses for testing purposes
-	SavingTestresult,
-	ShowingTestresults,
-	ExportingTestresults,
-	FinishedTesting
-	//--- --- ---
-};
-
-void executePerformanceTests()
+int main()
 {
 	HFramegrabber camera;
 	ImagePrepper prepper;
@@ -63,56 +21,23 @@ void executePerformanceTests()
 	ApplicationStatus currentStatus = InitializingObjects;
 	bool unknownStatus = false;
 
-	//Addition Performance Testing
-	std::string expectedNumbers[] = NUMBERS_ON_TESTPHOTOS;
-	std::string foundNumbers[MAX_PHOTOCOUNT];
-	//--- --- ---
+	//Adding extra objects for testing purposes
+#if RUN_PERFORMANCE_TESTS
+	PerformanceTester performanceTester = PerformanceTester(&identifier, &photocounter);
+#endif //RUN_PERFORMANCE_TESTS
 
 	while (!unknownStatus)
 	{
-		//Addition Performance Testing
-		if (currentStatus == WaitingForInput)
-			currentStatus = SavingTestresult;
-		else if(currentStatus == None)
-			currentStatus = ShowingTestresults;
-		//--- --- ---
+		//Collecting & Exporting testdata
+#if RUN_PERFORMANCE_TESTS
+		performanceTester.nextStepTest(&currentStatus);
+#endif //RUN_PERFORMANCE_TESTS
 
 		switch (currentStatus)
 		{
-
-		//Addition Performance Testing
-		case SavingTestresult:
-		{
-			std::cout << "Saving testresult...\n";
-			foundNumbers[photocounter - 1] = identifier.GetFoundNumber();
-			currentStatus = AquiringImage;
-		}
-		break;
-		case ShowingTestresults:
-		{
-			std::cout << "---Results Performance Test---\n";
-			for (UINT16 i = 1; i <= MAX_PHOTOCOUNT; i++)
-			{
-				std::cout << "Photo ID: " << i
-					<< ", Expected: " << expectedNumbers[i - 1]
-					<< ", Found: " << foundNumbers[i - 1]
-					<< ", Is Match? " << ((expectedNumbers[i - 1] == foundNumbers[i - 1]) ? "YES" : "NO")
-					<< "\n";
-			}
-			std::cout << "---End Performance Test---\n";
-			currentStatus = ExportingTestresults;
-		}
-		break;
-		case ExportingTestresults:
-		{
-			currentStatus = FinishedTesting;
-		}
-		break;
-		//--- --- ---
-
 		case InitializingObjects:
 		{
-			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", TESTPHOTOS_ROOT, "default", 1, -1);
+			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
 			identifier = DigitIdentifier(OCR_FONT_NAME);
 
 			currentStatus = ConnectingToServer;
@@ -213,14 +138,6 @@ void executePerformanceTests()
 		}
 		break;
 		}
-	}
-}
-
-int main()
-{
-	if (RUN_PERFORMANCE_TESTS)
-	{
-		executePerformanceTests();
 	}
 }
 

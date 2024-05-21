@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Testscripts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Fotoanalyses_Application\DigitFinder.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
@@ -27,5 +24,16 @@
     <ClCompile Include="..\Fotoanalyses_Application\ImagePrepper.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Testscript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Testscript_Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{7383554A-5589-4380-B5D4-CA3C01EFAAA0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Testscripts</RootNamespace>
+    <RootNamespace>Testscript</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Testscript</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -107,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Fotoanalyses_Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,7 +157,11 @@
     <ClCompile Include="..\Fotoanalyses_Application\DigitFinder.cpp" />
     <ClCompile Include="..\Fotoanalyses_Application\DigitIdentifier.cpp" />
     <ClCompile Include="..\Fotoanalyses_Application\ImagePrepper.cpp" />
-    <ClCompile Include="Testscripts.cpp" />
+    <ClCompile Include="Code.cpp" />
+    <ClCompile Include="Testscript.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Testscript_Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
