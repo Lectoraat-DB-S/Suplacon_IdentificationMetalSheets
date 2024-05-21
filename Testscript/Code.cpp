@@ -1,3 +1,7 @@
+//Used for configuring the testscript
+#include "Testscript_Settings.h"
+//--- --- ---
+
 #include "Fotoanalyses_Settings.h"
 
 using namespace HalconCpp;
@@ -17,8 +21,18 @@ int main()
 	ApplicationStatus currentStatus = InitializingObjects;
 	bool unknownStatus = false;
 
+	//Adding extra objects for testing purposes
+#if RUN_PERFORMANCE_TESTS
+	PerformanceTester performanceTester = PerformanceTester(&identifier, &photocounter);
+#endif //RUN_PERFORMANCE_TESTS
+
 	while (!unknownStatus)
 	{
+		//Collecting & Exporting testdata
+#if RUN_PERFORMANCE_TESTS
+		performanceTester.nextStepTest(&currentStatus);
+#endif //RUN_PERFORMANCE_TESTS
+
 		switch (currentStatus)
 		{
 		case InitializingObjects:
@@ -33,15 +47,6 @@ int main()
 		{
 			try {
 				client.connect(URL_OPC_UA_SERVER);
-
-				Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
-				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
-				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
-				std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
-				std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
-				std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
-				std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
-				std::cout << "---End Information---\n";
 
 				currentStatus = StartingImageAquisition;
 			}
@@ -135,3 +140,4 @@ int main()
 		}
 	}
 }
+
