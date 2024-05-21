@@ -1,16 +1,4 @@
-#include <iomanip>
-#include <iostream>
-
 #include "Fotoanalyses_Settings.h"
-
-#include "HalconCpp.h"
-#include "open62541pp/open62541pp.h"
-
-#include "ImagePrepper.h"
-#include "DigitFinder.h"
-#include "DigitIdentifier.h"
-
-#include "OPC_UA_Settings.h"
 
 using namespace HalconCpp;
 using namespace opcua;
