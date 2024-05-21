@@ -80,6 +80,7 @@ int main()
 			if (photocounter <= MAX_PHOTOCOUNT)
 			{
 				image = camera.GrabImageAsync(-1);
+				image = image.Rgb1ToGray();
 				std::cout << "New image acquired!\n";
 				currentStatus = PreppingImage;
 			}

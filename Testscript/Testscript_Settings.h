@@ -1,14 +1,16 @@
 #ifndef TESTSCRIPT_SETTINGS_H
 #define TESTSCRIPT_SETTINGS_H
 
-#define RUN_PERFORMANCE_TESTS true
-//#define RUN_FUNCTIONAL_TESTS false
-//#define RUN_UNITTESTS false
-
 //#define TESTRESULTS_ROOT "../Testresults"
+
+#define RUN_PERFORMANCE_TESTS false
+#define NUMBERS_ON_TESTPHOTOS {"1963814007", "1963814005"} 
 //#define PERFORMANCE_RESULTS_LOCATION "/Performance"
 
-#define NUMBERS_ON_TESTPHOTOS {"1963814007", "1963814005"} 
+#define RUN_UNITTESTS true
+#define TEST_IMAGEPREPPER true
+
+//#define RUN_FUNCTIONAL_TESTS false
 
 #include <string>
 
@@ -26,6 +28,16 @@ private:
 public:
 	PerformanceTester(DigitIdentifier* currentIdentifier, BYTE* currentPhotocount);
 	void nextStepTest(ApplicationStatus* currentStatus);
+};
+
+class Unittester
+{
+private:
+	BYTE* currentPhotocount;
+
+public:
+	Unittester(BYTE* currentPhotocount);
+	void nextStepTest(ApplicationStatus* currentStatus, HalconCpp::HImage currentImage, ImagePrepper* imagePrepper);
 };
 
 
