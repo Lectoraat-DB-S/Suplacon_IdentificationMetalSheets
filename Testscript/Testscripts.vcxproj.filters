@@ -15,33 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Fotoanalyses_Application.cpp">
+    <ClCompile Include="..\Fotoanalyses_Application\DigitFinder.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Fotoanalyses_Application\DigitIdentifier.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Fotoanalyses_Application\ImagePrepper.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DigitIdentifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImagePrepper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DigitFinder.cpp">
+    <ClCompile Include="Testscript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DigitIdentifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImagePrepper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DigitFinder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OPC_UA_Settings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Fotoanalyses_Settings.h">
+    <ClInclude Include="Testscript_Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
