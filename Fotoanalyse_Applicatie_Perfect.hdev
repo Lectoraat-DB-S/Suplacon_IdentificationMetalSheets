@@ -17,7 +17,7 @@
 <l>emphasize (ImageResult, ImageEnhanced, Width, Height, 2)</l>
 <l>invert_image (ImageEnhanced, ImageInvert)</l>
 <c></c>
-<l>binary_threshold(ImageInvert,Regions,'max_separability', 'dark', UsedThreshold)</l>
+<l>char_threshold(ImageInvert, ImageInvert, Regions,5,99, Threshold)</l>
 <l>connection (Regions, ConnectedRegions)</l>
 <l>dev_clear_window()</l>
 <l>dev_display(ImageInvert)</l>
