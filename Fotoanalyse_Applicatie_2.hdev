@@ -11,35 +11,26 @@
 <c></c>
 <c>* Step1: Segmentation</c>
 <l>rgb1_to_gray(Image, ImageGray)</l>
-<l>*zoom_image_factor(ImageGray, ImageZoom, 0.25, 0.25, 'constant')</l>
-<l>*coherence_enhancing_diff(ImageGray, ImageGrayEnhanced,0.5, 3, 0.5, 20)</l>
-<l>*shock_filter(ImageGray, ImageGrayEnhanced,0.5, 10, 'canny', 1)</l>
 <c></c>
 <l>gray_range_rect (ImageGray, ImageResult, 5,5)</l>
 <l>get_image_size (ImageGray, Width, Height)</l>
 <l>emphasize (ImageResult, ImageEnhanced, Width, Height, 2)</l>
 <l>invert_image (ImageEnhanced, ImageInvert)</l>
 <c></c>
-<l>threshold (ImageInvert, Regions, 0, 200)</l>
+<l>binary_threshold(ImageInvert, Regions,'max_separability', 'dark', UsedThreshold)</l>
 <l>connection (Regions, ConnectedRegions)</l>
-<l>*erosion_circle (ConnectedRegions, RegionsErosion, 3.5)</l>
-<l>*connection (RegionsErosion, ConnectedErodedRegions)</l>
 <l>dev_clear_window()</l>
 <l>dev_display(ImageInvert)</l>
 <l>dev_display(ConnectedRegions)</l>
 <c></c>
 <l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 1000, 3000)</l>
-<l>dev_clear_window()</l>
-<l>dev_display(ImageInvert)</l>
-<l>dev_display(SelectedRegions)</l>
-<c></c>
 <l>select_shape (SelectedRegions, SelectedRegionsWidth, 'width', 'and', 35, 70)</l>
 <l>select_shape (SelectedRegionsWidth, SelectedRegionsHeight, 'height', 'and', 70, 140)</l>
-<l>dev_clear_window()</l>
-<l>dev_display(ImageInvert)</l>
-<l>dev_display(SelectedRegionsHeight)</l>
 <c></c>
 <l>sort_region (SelectedRegionsHeight, SortedRegions, 'first_point', 'true', 'column')</l>
+<l>dev_clear_window()</l>
+<l>dev_display(ImageInvert)</l>
+<l>dev_display(SortedRegions)</l>
 <c></c>
 <c>* Step2: Reading</c>
 <l>count_obj (SortedRegions, Number)</l>
