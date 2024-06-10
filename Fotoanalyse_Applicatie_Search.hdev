@@ -29,6 +29,7 @@
 <l>dev_clear_window()</l>
 <l>dev_display(ImageInvert)</l>
 <l>dev_display(SelectedRegions)</l>
+<l>stop()</l>
 <c>*--- --- ---</c>
 <l>dilation_rectangle1(SelectedRegions, RegionDilation,1201,101)</l>
 <l>union1(RegionDilation, RegionUnion)</l>
@@ -52,6 +53,7 @@
 <l>dev_clear_window()</l>
 <l>dev_display(ImageInvertReduced)</l>
 <l>dev_display(SelectedRegionsReduced)</l>
+<l>stop()</l>
 <c>*--- --- ---</c>
 <l>union1(SelectedRegionsReduced, RegionUnionDigits)</l>
 <l>smallest_rectangle2(RegionUnionDigits,Row,Column,Phi,Length1,Length2)</l>
