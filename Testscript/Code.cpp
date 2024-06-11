@@ -1,4 +1,4 @@
-//Used for configuring the testscript
+//Used for configuring the testscripts
 #include "Testscript_Settings.h"
 //--- --- ---
 
@@ -6,6 +6,7 @@
 
 using namespace HalconCpp;
 using namespace opcua;
+
 
 int main()
 {
@@ -25,6 +26,9 @@ int main()
 #if RUN_PERFORMANCE_TESTS
 	PerformanceTester performanceTester = PerformanceTester(&identifier, &photocounter);
 #endif //RUN_PERFORMANCE_TESTS
+#if RUN_UNITTESTS 
+	Unittester unitester = Unittester(&photocounter);
+#endif //RUN_UNITTESTS 
 
 	while (!unknownStatus)
 	{
@@ -32,6 +36,9 @@ int main()
 #if RUN_PERFORMANCE_TESTS
 		performanceTester.nextStepTest(&currentStatus);
 #endif //RUN_PERFORMANCE_TESTS
+#if RUN_UNITTESTS 
+		unitester.nextStepTest(&currentStatus, image, &prepper);
+#endif //RUN_UNITTESTS 
 
 		switch (currentStatus)
 		{
@@ -47,6 +54,15 @@ int main()
 		{
 			try {
 				client.connect(URL_OPC_UA_SERVER);
+
+				Node<Client> nodeProgramnumber = client.getRootNode().browseChild({
+				{OBJECTS_NODE_NAMESPACEID, OBJECTS_NODE_NAME},
+				{PROGRAMNUMBER_NODE_NAMESPACEID, PROGRAMNUMBER_NODE_NAME} });
+				std::cout << "---Information about the \"" << nodeProgramnumber.readDisplayName().getText() << "\" node---\n";
+				std::cout << "Description: \"" << nodeProgramnumber.readDescription().getText() << "\"\n";
+				std::cout << "ID: (" << nodeProgramnumber.id().toString() << ")\n";
+				std::cout << "Value: [" << nodeProgramnumber.readDataValue().getValue().getScalarCopy<std::string>() << "]\n";
+				std::cout << "---End Information---\n";
 
 				currentStatus = StartingImageAquisition;
 			}
@@ -85,6 +101,7 @@ int main()
 			if (photocounter <= MAX_PHOTOCOUNT)
 			{
 				image = camera.GrabImageAsync(-1);
+				image = image.Rgb1ToGray();
 				std::cout << "New image acquired!\n";
 				currentStatus = PreppingImage;
 			}
@@ -140,4 +157,3 @@ int main()
 		}
 	}
 }
-

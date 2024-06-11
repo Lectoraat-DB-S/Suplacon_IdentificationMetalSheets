@@ -54,3 +54,42 @@ void PerformanceTester::nextStepTest(ApplicationStatus* currentStatus)
 		//Do nothing
 	}
 }
+
+
+Unittester::Unittester(BYTE* currentPhotocount)
+{
+	this->currentPhotocount = currentPhotocount;
+}
+
+void Unittester::nextStepTest(ApplicationStatus* currentStatus, HalconCpp::HImage currentImage, ImagePrepper* imagePrepper)
+{
+	if (*currentStatus == WaitingForInput)
+		*currentStatus = AquiringImage;
+	else if (*currentStatus == PreppingImage)
+	{
+		std::cout << "Collecting Original Image...\n";
+		currentImage.InvertImage().WriteImage("png", 255, std::to_string((int)(* currentPhotocount) * 2 - 1).c_str());
+	}
+	else if (*currentStatus == FindingDigits)
+	{
+		std::cout << "Collecting Prepped Image...\n";
+		imagePrepper->getImage().WriteImage("png", 255, std::to_string((int)(*currentPhotocount) * 2).c_str());
+	}
+	else if (*currentStatus == None)
+	{
+		std::cout << "---Results Unittest---\n\n";
+		std::cout << "Testname: \'Validation ImagePrepper'\n";
+		std::cout << "Manual review of the photosets is required!\n";
+		std::cout << "Photoset ID's\n";
+		for (UINT16 i = 1; i <= MAX_PHOTOCOUNT * 2; i += 2)
+		{
+			std::cout << "Set " << (i - 1)/2 + 1 << " : " << i << " & " << i + 1 << "\n";
+		}
+
+		std::cout << "\n---End Unittest---\n";
+	}
+	else
+	{
+		//Do nothing
+	}
+}

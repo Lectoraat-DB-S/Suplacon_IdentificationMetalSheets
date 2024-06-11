@@ -17,7 +17,6 @@ ImagePrepper::ImagePrepper(HImage image)
 bool ImagePrepper::execute()
 {
 	image = image.ZoomImageFactor(ZOOM_FACTOR, ZOOM_FACTOR, "constant");
-	image = image.Rgb1ToGray();
 	image = image.GrayRangeRect(PREPPER_MASK_SIZE, PREPPER_MASK_SIZE);
 
 	Hlong width, height;
