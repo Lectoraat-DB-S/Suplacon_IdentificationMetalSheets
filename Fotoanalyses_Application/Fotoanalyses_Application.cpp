@@ -23,7 +23,8 @@ int main()
 		{
 		case InitializingObjects:
 		{
-			camera = HFramegrabber("File", 1, 1, 0, 0, 0, 0, "default", -1, "default", -1, "false", PHOTOSROOT, "default", 1, -1);
+			camera = HFramegrabber(INTERFACE_NAME, RESOLUTION, RESOLUTION, 0, 0, 0, 0, FIELD, -1, "default", -1, "false", PHOTOSROOT, DEVICE_NAME, PORT, -1);
+			//camera = HFramegrabber('GigEVision2', 0, 0, 0, 0, 0, 0, 'progressive', -1, 'default', -1, 'false', 'default', '0030534b6f89_Basler_acA128060gm', 0, -1);
 			identifier = DigitIdentifier(OCR_FONT_NAME);
 
 			currentStatus = ConnectingToServer;
@@ -83,6 +84,9 @@ int main()
 				image = image.Rgb1ToGray();
 				std::cout << "New image acquired!\n";
 				currentStatus = PreppingImage;
+#if SAVING_PHOTOS
+				image.WriteImage("png", 255, std::to_string((int) photocounter).c_str());
+#endif
 			}
 			else
 				currentStatus = EndingImageAquisition;
