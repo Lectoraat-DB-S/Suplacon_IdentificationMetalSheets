@@ -5,10 +5,10 @@
 #define STD_DEV_SCALE 0.2
 #define ABS_THRESHOLD 2
 
-#define MIN_AREA_DIGIT 450
-#define MAX_AREA_DIGIT 900
-#define MIN_SIZE_DIGIT 0
-#define MAX_SIZE_DIGIT 60
+#define MIN_AREA_DIGIT 150
+#define MAX_AREA_DIGIT 99999
+#define MIN_SIZE_DIGIT 35
+#define MAX_SIZE_DIGIT 70
 
 #include "HalconCpp.h"
 

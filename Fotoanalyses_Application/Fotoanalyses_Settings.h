@@ -1,7 +1,7 @@
 #ifndef FOTOANALYSES_SETTINGS_H
 #define FOTOANALYSES_SETTINGS_H
 
-#define USING_CAMERA false
+#define USING_CAMERA true
 #if USING_CAMERA
 #define SAVING_PHOTOS true
 #define INTERFACE_NAME "GigEVision2"
@@ -20,7 +20,8 @@
 #endif
 
 
-#define MAX_PHOTOCOUNT 2//7
+#define MAX_PHOTOCOUNT 99
+#define MAX_DELAY 99.9
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 
 #include <iomanip>
