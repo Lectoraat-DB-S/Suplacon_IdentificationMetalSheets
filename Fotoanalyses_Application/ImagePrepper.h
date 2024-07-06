@@ -1,7 +1,7 @@
 #ifndef IMAGEPREPPER_H
 #define IMAGEPREPPER_H
 
-#define ZOOM_FACTOR 0.25
+#define ZOOM_FACTOR 1//0.25
 #define PREPPER_MASK_SIZE 5
 #define EMPHASIZE_FACTOR 2
 
