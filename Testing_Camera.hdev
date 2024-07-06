@@ -18,11 +18,17 @@
 <c>    </c>
 <l>    char_threshold(ImageInvert, ImageInvert, Regions, 5, 99.5, Threshold)</l>
 <l>    connection (Regions, ConnectedRegions)</l>
+<c>    </c>
+<l>    select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 150, 99999)</l>
+<l>    select_shape (SelectedRegions, SelectedRegions, 'height', 'and', 0, 60)</l>
+<l>    select_shape (SelectedRegions, SelectedRegions, 'width', 'and', 35, 60)</l>
+<c></c>
+<l>    sort_region (SelectedRegions, SortedRegions, 'first_point', 'true', 'column')</l>
 <l>    dev_clear_window()</l>
 <l>    dev_display(ImageInvert)</l>
-<l>    dev_display(ConnectedRegions)</l>
+<l>    dev_display(SortedRegions)</l>
 <c>    </c>
-<l>    wait_seconds(1)</l>
+<l>    wait_seconds(5)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[3,1]" as_ord="1">endwhile</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[4,1]" as_ord="1">close_framegrabber (AcqHandle)</l>
 <c></c>
