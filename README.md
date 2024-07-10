@@ -45,14 +45,29 @@ cd open62541pp
 # build
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
-cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode
+cmake --build . --config Release
 
 # run tests
 ctest --output-on-failure
 ```
-3. Navigeer naar (REPO_ROOT)\open62541pp\build
+3. Navigeer in Windows Verkenner naar (REPO_ROOT)\open62541pp\build
 4. Start 'open62541++.sln' met Visual Studio
 5. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
+
+**NB** Na het bouwen staan de volgende twee errors in de Error List van Visual Studio: 'XXX' en 'XXX'. Dit kan geen kwaad voor het succesvol runnen van het Vision Systeem.
+
+## Testen software
+Doorloop de volgende stappen om de correcte werking van het project te valideren:
+1. Navigeer in Windows Verkenner naar (REPO_ROOT)\Fotoanalyses_Application
+2. Start 'Vision_Systeem.sln' met Visual Studio
+3. Run het project
+Dit is de verwachte uitkomst bij een correcte werking: Plaatjes & toelichting juiste output
+
+# Testen camera
+1. Plug de camera in via USB poort
+2. Navigeer binnen Visual Studio naar Fotoanalyse_Settings.h
+3. Verander 'USING_CAMERA false' naar 'USING_CAMERA true'
+4. De gemaakte foto's komen te staan in (REPO_ROOT)\Fotoanalyses_Application
 
 
 # template-repository 
