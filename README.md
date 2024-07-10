@@ -1,5 +1,3 @@
-Test
-
 # Identification Metal Plates (IDM) 🦾
 Vision system for reading codes on metal plates!
 This project is done in cooperation with Suplacon in Emmeloord.
@@ -7,27 +5,39 @@ This project is done in cooperation with Suplacon in Emmeloord.
 ## Benodigde software
 - MVTec HALCON 23.11 Progress Student Edition 
 - Visual Studio 2019
-- GitHub Desktop (Inclusief Git, CMake & Python3)
+- GitHub Desktop
+- Git
+- Python 3.10
+- CMake
 - Open62541pp
 
-### Installatie
+### Installatiestappen
 Stappenplan voor installeren benodigde software
 #### HALCON
 1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
 2. Doorloop de volgende studenthandleiding: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
-3. Installeer alle beschikbare packages, **behalve** *'xxx'*.
+3. Installeer alle beschikbare packages.
 
 #### Visual Studio 2019
 1. Selecteer en installeer workload *'Desktop development with C++'*
-2. ~~Start de PC opnieuw op~~
+2. Indien nodig, start de PC opnieuw op.
 
 #### GitHub Desktop
-1. /
+1. Installeer
 2. Clone deze repository
 
+#### Git
+1. Installeer Git
+
+#### Python
+1. Installeer Python 3.10
+
+#### CMake
+1. Installeer CMake
+
 #### Open62541pp
-2. Navigeer binnen GitHub Desktop naar: 'Repository'->'Open in Command Prompt'.
-3. Build de *open62541pp* repository met de volgende opdrachten:
+1. Navigeer binnen GitHub Desktop naar: 'Repository'->'Open in Command Prompt'.
+2. Build de *open62541pp* repository met de volgende opdrachten:
 ```
 # navigate
 cd open62541pp
@@ -40,9 +50,9 @@ cmake --build . --config Release  # multi-configuration generator like Visual St
 # run tests
 ctest --output-on-failure
 ```
-4. Navigeer naar (REPO_ROOT)\open62541pp\build
-5. Start 'open62541++.sln' met Visual Studio
-6. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
+3. Navigeer naar (REPO_ROOT)\open62541pp\build
+4. Start 'open62541++.sln' met Visual Studio
+5. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
 
 
 # template-repository 
