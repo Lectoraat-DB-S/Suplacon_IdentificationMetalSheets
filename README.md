@@ -59,6 +59,7 @@ ctest --output-on-failure
 
 # Testen code
 Doorloop de volgende stappen om de correcte werking van de code te valideren:
+
 1. Navigeer in Windows Verkenner naar (REPO_ROOT)\Fotoanalyses_Application
 2. Start *'Vision_Systeem.sln'* met Visual Studio
 3. Run het project
