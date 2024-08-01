@@ -64,6 +64,7 @@ Doorloop de volgende stappen om de correcte werking van de code te valideren:
 3. Run het project
 
 In de console verschijnt bij een correcte werking de onderstaande tekst:
+![Output_Testen_Software](https://github.com/user-attachments/assets/965860c5-22f3-42df-bb8f-9ce35500d1de)
 
 
 # Testen camera
