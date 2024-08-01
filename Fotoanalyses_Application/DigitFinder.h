@@ -1,14 +1,14 @@
 #ifndef DIGITFINDER_H
 #define DIGITFINDER_H
 
-#define FINDER_MASK_SIZE 15
-#define STD_DEV_SCALE 0.2
-#define ABS_THRESHOLD 2
+#define SIGMA 5
+#define PERCENT 99.5
 
 #define MIN_AREA_DIGIT 150
 #define MAX_AREA_DIGIT 99999
-#define MIN_SIZE_DIGIT 35
+#define MIN_SIZE_DIGIT 18
 #define MAX_SIZE_DIGIT 70
+#define SIZE_MULTIPLIER 2
 
 #include "HalconCpp.h"
 

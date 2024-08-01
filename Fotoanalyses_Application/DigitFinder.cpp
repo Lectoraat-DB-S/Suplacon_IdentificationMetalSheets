@@ -16,12 +16,13 @@ DigitFinder::DigitFinder(HImage image)
 bool DigitFinder::execute()
 {
 	Hlong threshold = 0;
-	HRegion darkRegions = image.CharThreshold(image, 5, 99.5, &threshold);
+	HRegion darkRegions = image.CharThreshold(image, SIGMA, PERCENT, &threshold);
+	//darkRegions = darkRegions.Skeleton();
 	darkRegions = darkRegions.Connection();
 
 	darkRegions = darkRegions.SelectShape("area", "and", MIN_AREA_DIGIT, MAX_AREA_DIGIT);
 	darkRegions = darkRegions.SelectShape("width", "and", MIN_SIZE_DIGIT, MAX_SIZE_DIGIT);
-	//darkRegions = darkRegions.SelectShape("height", "and", MIN_SIZE_DIGIT * 2, MAX_SIZE_DIGIT * 2);
+	darkRegions = darkRegions.SelectShape("height", "and",(double) MIN_SIZE_DIGIT * SIZE_MULTIPLIER, (double) MAX_SIZE_DIGIT * SIZE_MULTIPLIER);
 
 	darkRegions = darkRegions.SortRegion("first_point", "true", "column");
 	outlineDigits = darkRegions;

@@ -161,6 +161,7 @@
     <ClCompile Include="Testscript.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Fotoanalyses_Application\Fotoanalyses_Settings.h" />
     <ClInclude Include="Testscript_Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,22 +1,27 @@
 #ifndef TESTSCRIPT_SETTINGS_H
 #define TESTSCRIPT_SETTINGS_H
 
-//#define TESTRESULTS_ROOT "../Testresults"
-
-#define RUN_PERFORMANCE_TESTS false
-#define NUMBERS_ON_TESTPHOTOS {"1963814007", "1963814005"} 
-//#define PERFORMANCE_RESULTS_LOCATION "/Performance"
-
-#define RUN_UNITTESTS true
+#define RUN_PERFORMANCE_TESTS true
+#define RUN_UNITTESTS false
+#if RUN_UNITTESTS
 #define TEST_IMAGEPREPPER true
-
-//#define RUN_FUNCTIONAL_TESTS false
+#endif
 
 #include <string>
 
 #include "HalconCpp.h"
 
 #include "Fotoanalyses_Settings.h"
+
+const std::string expectedNumbers[MAX_PHOTOCOUNT] = {
+	"1963896001", "1963500001", "1936814007",
+	"1966566004", "1966580001", "1966520002",
+	"1966520005", "1966558005", "1966558003",
+	"1966558008", "1966558003", "1966558004",
+	"1966558007", "1966558009", "1966558010",
+	"1966558006", "1966558005", "1966566003",
+	"1966566002", "1966518018", "1966518005",
+	"1966518001" };
 
 class PerformanceTester
 {

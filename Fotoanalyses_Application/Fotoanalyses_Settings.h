@@ -1,7 +1,7 @@
 #ifndef FOTOANALYSES_SETTINGS_H
 #define FOTOANALYSES_SETTINGS_H
 
-#define USING_CAMERA true
+#define USING_CAMERA false
 #if USING_CAMERA
 #define SAVING_PHOTOS true
 #define INTERFACE_NAME "GigEVision2"
@@ -11,16 +11,17 @@
 #define DEVICE_NAME "0030534b6f89_Basler_acA128060gm"
 #define PORT 0
 #else
+#define IS_GRAYSCALE true
 #define INTERFACE_NAME "File"
 #define RESOLUTION 1
 #define FIELD "default"
-#define PHOTOSROOT "../Testfotos_Plaatcodes_2"
+#define PHOTOSROOT "../Dataset_Plaatcodes"
 #define DEVICE_NAME "default"
 #define PORT 1
 #endif
 
 
-#define MAX_PHOTOCOUNT 99
+#define MAX_PHOTOCOUNT 22
 #define MAX_DELAY 99.9
 #define OCR_FONT_NAME "Industrial_0-9_NoRej"
 

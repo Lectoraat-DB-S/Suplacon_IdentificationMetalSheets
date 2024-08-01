@@ -35,5 +35,8 @@
     <ClInclude Include="Testscript_Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Fotoanalyses_Application\Fotoanalyses_Settings.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
