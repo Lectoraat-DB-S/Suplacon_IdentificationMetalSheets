@@ -1,6 +1,5 @@
-# Identification Metal Plates (IDM) 🦾
-Vision system for reading codes on metal plates!
-This project is done in cooperation with Suplacon in Emmeloord.
+# Identificatie en Detectie Metaalplaten (IDM) 🦾
+Project IDM is in samenwerking met [Suplacon](https://suplacon.com/over-ons/) te Emmeloord uitgevoerd. Deze repository bevat code voor het lezen van nummers op metalen platen bij Suplacon.
 
 ## Benodigde software
 - MVTec HALCON 23.11 Progress Student Edition 
@@ -12,18 +11,20 @@ This project is done in cooperation with Suplacon in Emmeloord.
 - Open62541pp
 
 ### Installatiestappen
-Stappenplan voor installeren benodigde software
+Stappenplan voor het installeren van de benodigde software
+
 #### HALCON
 1. Vraag als student een activatietoken aan: [Request-Form-Student](https://www.mvtec.com/company/mvtec-on-campus/licenses/student/request-form-student)
 2. Doorloop de volgende studenthandleiding: [Manual-For-Students](https://go.mvtec.com/acton/attachment/43208/f-8e7a684d-596d-4852-a07e-1e08c28b31b0/1/-/-/-/-/Campus%20manual%20for%20students_EN.pdf)
 3. Installeer alle beschikbare packages.
 
 #### Visual Studio 2019
+1. Installeer Visual Studio 2019
 1. Selecteer en installeer workload *'Desktop development with C++'*
 2. Indien nodig, start de PC opnieuw op.
 
 #### GitHub Desktop
-1. Installeer
+1. Installeer GitHub Desktop
 2. Clone deze repository
 
 #### Git
@@ -36,7 +37,7 @@ Stappenplan voor installeren benodigde software
 1. Installeer CMake
 
 #### Open62541pp
-1. Navigeer binnen GitHub Desktop naar: 'Repository'->'Open in Command Prompt'.
+1. Navigeer binnen GitHub Desktop naar: *'Repository'*->*'Open in Command Prompt'*.
 2. Build de *open62541pp* repository met de volgende opdrachten:
 ```
 # navigate
@@ -51,8 +52,8 @@ cmake --build . --config Release
 ctest --output-on-failure
 ```
 3. Navigeer in Windows Verkenner naar (REPO_ROOT)\open62541pp\build
-4. Start 'open62541++.sln' met Visual Studio
-5. Navigeer binnen Visual Studio naar 'Build'->'Build'->'PACKAGE'
+4. Start *'open62541++.sln'* met Visual Studio
+5. Navigeer binnen Visual Studio naar *'Build'*->*'Build'*->*'PACKAGE'*
 
 **NB** Na het bouwen staan de volgende twee errors in de Error List van Visual Studio: 'XXX' en 'XXX'. Dit kan geen kwaad voor het succesvol runnen van het Vision Systeem.
 
