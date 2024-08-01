@@ -1,4 +1,4 @@
-# Identificatie en Detectie Metaalplaten (IDM) 🦾
+# Identificatie en Detectie Metaalplaten (IDM) <img src="https://github.com/user-attachments/assets/e7c92833-1d47-47f4-a2fb-d34824f52796" width="50" height="50"/> <img src="https://github.com/user-attachments/assets/78b8f6cd-a2cb-4590-8b41-225efad372bc" width="50" height="50"/>
 Project IDM is in samenwerking met [Suplacon](https://suplacon.com/over-ons/) te Emmeloord uitgevoerd. Deze repository bevat code voor het lezen van nummers op metalen platen bij Suplacon.
 
 ## Benodigde software
@@ -57,17 +57,21 @@ ctest --output-on-failure
 
 **N.B.** Na het bouwen staan de volgende twee errors in de *'Error List'* van Visual Studio: *'Could not create CPack generator: RPM'* en *'The command "setlocal...'*. Dit kan geen kwaad voor het succesvol runnen van de code.
 
-## Testen software
-Doorloop de volgende stappen om de correcte werking van het project te valideren:
+# Testen code
+Doorloop de volgende stappen om de correcte werking van de code te valideren:
 1. Navigeer in Windows Verkenner naar (REPO_ROOT)\Fotoanalyses_Application
 2. Start *'Vision_Systeem.sln'* met Visual Studio
 3. Run het project
-Dit is de verwachte uitkomst bij een correcte werking: Plaatjes & toelichting juiste output
+
+In de console verschijnt bij een correcte werking de onderstaande tekst:
+
 
 # Testen camera
-1. Plug de camera in via een USB poort van de PC
-2. Navigeer binnen Visual Studio naar Fotoanalyse_Settings.h
-3. Verander 'USING_CAMERA false' naar 'USING_CAMERA true'
-4. De gemaakte foto's komen te staan in (REPO_ROOT)\Fotoanalyses_Application
+1. Plug een [Basler acA1280-60gm](https://www.baslerweb.com/en/shop/aca1280-60gm/) camera in via een Gigabit Ethernet poort van de PC
+2. Navigeer binnen Visual Studio naar *'Fotoanalyse_Settings.h'*
+3. Verander ```#define USING_CAMERA false``` in ```#define USING_CAMERA true```
+4. Run het project
+
+De gemaakte foto's komen te staan in (REPO_ROOT)\Fotoanalyses_Application
 
 
