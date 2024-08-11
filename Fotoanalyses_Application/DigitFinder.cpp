@@ -1,4 +1,3 @@
-//Finding possible numbers
 #include "DigitFinder.h"
 
 using namespace HalconCpp;
@@ -17,7 +16,6 @@ bool DigitFinder::execute()
 {
 	Hlong threshold = 0;
 	HRegion darkRegions = image.CharThreshold(image, SIGMA, PERCENT, &threshold);
-	//darkRegions = darkRegions.Skeleton();
 	darkRegions = darkRegions.Connection();
 
 	darkRegions = darkRegions.SelectShape("area", "and", MIN_AREA_DIGIT, MAX_AREA_DIGIT);
