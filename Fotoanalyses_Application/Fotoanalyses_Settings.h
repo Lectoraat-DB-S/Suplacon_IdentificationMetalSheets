@@ -15,7 +15,7 @@
 #define INTERFACE_NAME "File"
 #define RESOLUTION 1
 #define FIELD "default"
-#define PHOTOSROOT "../Dataset_Plaatcodes"
+#define PHOTOSROOT "../Dataset_Plaatcodes/Fotos_Camera"
 #define DEVICE_NAME "default"
 #define PORT 1
 #endif
