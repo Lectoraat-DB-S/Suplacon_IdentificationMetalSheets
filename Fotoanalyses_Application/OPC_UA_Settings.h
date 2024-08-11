@@ -1,12 +1,16 @@
 #ifndef OPC_UA_SETTINGS_H
 #define OPC_UA_SETTINGS_H
 
-#define URL_OPC_UA_SERVER "opc.tcp://LAPTOP-TCB5V9RI:4840" //"opc.tcp://DESKTOP-SISA661:4840"
+//The following macros are used to configure the OPC UA part of the application.
+//--> OPC UA Server: /
+#define URL_OPC_UA_SERVER "opc.tcp://LAPTOP-TCB5V9RI:4840"
 #define PORT_OPC_UA_SERVER 4840
 
+//--> Objects node: /
 #define OBJECTS_NODE_NAME "Objects"
 #define OBJECTS_NODE_NAMESPACEID 0
 
+//--> Programnumber node: This node contains a programnumber found by the application
 #define PROGRAMNUMBER_NODE_NAME "FoundProgramnumber"
 #define PROGRAMNUMBER_NODE_DISPLAYNAME "Found Programnumber"
 #define PROGRAMNUMBER_NODE_DESCRIPTION "The most recently found engraved number on a metal plate."

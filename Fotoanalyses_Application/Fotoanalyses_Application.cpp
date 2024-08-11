@@ -78,16 +78,16 @@ int main()
 			photocounter++;
 
 			if (photocounter <= MAX_PHOTOCOUNT)
-      {
+			{
 				image = camera.GrabImageAsync(MAX_DELAY);
 #if !IS_GRAYSCALE
 				image = image.Rgb1ToGray();
 #endif
-        
+
 				std::cout << "New image acquired!\n";
 				currentStatus = PreppingImage;
 #if SAVING_PHOTOS
-				image.WriteImage("png", 255, std::to_string((int) photocounter).c_str());
+				image.WriteImage("png", 255, std::to_string((int)photocounter).c_str());
 #endif
 			}
 			else

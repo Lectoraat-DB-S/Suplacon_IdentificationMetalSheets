@@ -1,5 +1,3 @@
-//Preprocessing image
-
 #include "ImagePrepper.h"
 
 using namespace HalconCpp;
