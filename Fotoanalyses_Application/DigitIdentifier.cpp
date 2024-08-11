@@ -1,5 +1,3 @@
-//Identifying/Reading numbers
-
 #include "DigitIdentifier.h"
 
 using namespace HalconCpp;
@@ -7,7 +5,6 @@ using namespace HalconCpp;
 DigitIdentifier::DigitIdentifier()
 {
 	this->maxDigitCount = MIN_DIGITS;
-	//Do nothing
 }
 
 DigitIdentifier::DigitIdentifier(const char* fontName)
