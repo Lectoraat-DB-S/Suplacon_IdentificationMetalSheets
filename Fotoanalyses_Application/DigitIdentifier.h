@@ -1,14 +1,15 @@
 #ifndef DIGITIDENTIFIER_H
 #define DIGITIDENTIFIER_H
 
-#define MIN_DIGITS 0
-#define MAX_DIGITS 10
-#define TOKEN_MISSING_DIGIT "?"
+//The following macros are used to configure the DigitIdentifier class.
+#define MIN_DIGITS 0 //Minimum amount of digits of a programnumber
+#define MAX_DIGITS 10 //Maximum amount of digits of a programnumber
+#define TOKEN_MISSING_DIGIT "?" //If a DigitIdentifier object receives less than the maximum amount of digits, then the value of each missing digit will be set to this token value.
 
 #include <string>
-
 #include "HalconCpp.h"
 
+//This struct stores information about a identified digit.
 struct Digit {
 	std::string value{};
 	double confidence{};
@@ -16,9 +17,9 @@ struct Digit {
 	double column{};
 };
 
+//This class is used to convert outlines of digits to a programnumber.
 class DigitIdentifier
 {
-
 private:
 	HalconCpp::HImage image;
 	HalconCpp::HRegion outlineDigits;
@@ -40,7 +41,6 @@ public:
 	HalconCpp::HImage getImage() { return image; };
 	HalconCpp::HRegion getOutlineDigits() { return outlineDigits; };
 	Digit* getFoundDigits() { return foundDigits; };
-
 };
 
 #endif

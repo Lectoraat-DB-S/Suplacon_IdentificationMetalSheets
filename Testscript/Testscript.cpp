@@ -18,15 +18,17 @@ void PerformanceTester::nextStepTest(ApplicationStatus* currentStatus)
 		foundNumbers[*currentPhotocount - 1] = currentIdentifier->GetFoundNumber();
 
 		std::cout << "Exporting Performance Data...\n";
-		outlineDigits = outlineDigits.DilationCircle(2.5);
-		image = image.PaintRegion(outlineDigits, 0.0, "fill");
+		if (outlineDigits.CountObj() > 0)
+		{
+			outlineDigits = outlineDigits.DilationCircle(2.5);
+			image = image.PaintRegion(outlineDigits, 0.0, "fill");
+		}
 		image.WriteImage("png", 255, std::to_string((int)* currentPhotocount).c_str());
 
 		*currentStatus = AquiringImage;
 	}
 	else if (*currentStatus == None)
 	{
-		std::string expectedNumbers[] = NUMBERS_ON_TESTPHOTOS;
 		bool areReadingsCorrect[MAX_PHOTOCOUNT];
 		BYTE correctReadingCounter = 0;
 

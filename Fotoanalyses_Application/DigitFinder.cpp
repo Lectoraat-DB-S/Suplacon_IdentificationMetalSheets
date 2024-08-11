@@ -1,4 +1,3 @@
-//Finding possible numbers
 #include "DigitFinder.h"
 
 using namespace HalconCpp;
@@ -15,14 +14,16 @@ DigitFinder::DigitFinder(HImage image)
 
 bool DigitFinder::execute()
 {
-	HRegion darkRegions = image.VarThreshold(FINDER_MASK_SIZE, FINDER_MASK_SIZE, STD_DEV_SCALE, ABS_THRESHOLD, "dark");
+	Hlong threshold = 0;
+	HRegion darkRegions = image.CharThreshold(image, SIGMA, PERCENT, &threshold);
 	darkRegions = darkRegions.Connection();
 
-	outlineDigits = darkRegions.SelectShape("area", "and", MIN_AREA_DIGIT, MAX_AREA_DIGIT);
-	outlineDigits = outlineDigits.SelectShape("width", "and", MIN_SIZE_DIGIT, MAX_SIZE_DIGIT);
-	outlineDigits = outlineDigits.SelectShape("height", "and", MIN_SIZE_DIGIT, MAX_SIZE_DIGIT);
+	darkRegions = darkRegions.SelectShape("area", "and", MIN_AREA_DIGIT, MAX_AREA_DIGIT);
+	darkRegions = darkRegions.SelectShape("width", "and", MIN_SIZE_DIGIT, MAX_SIZE_DIGIT);
+	darkRegions = darkRegions.SelectShape("height", "and",(double) MIN_SIZE_DIGIT * SIZE_MULTIPLIER, (double) MAX_SIZE_DIGIT * SIZE_MULTIPLIER);
 
-	outlineDigits = outlineDigits.SortRegion("first_point", "true", "column");
+	darkRegions = darkRegions.SortRegion("first_point", "true", "column");
+	outlineDigits = darkRegions;
 
 	return true;
 }

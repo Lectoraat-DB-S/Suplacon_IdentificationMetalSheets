@@ -1,17 +1,18 @@
 #ifndef DIGITFINDER_H
 #define DIGITFINDER_H
 
-#define FINDER_MASK_SIZE 15
-#define STD_DEV_SCALE 0.2
-#define ABS_THRESHOLD 2
-
-#define MIN_AREA_DIGIT 450
-#define MAX_AREA_DIGIT 900
-#define MIN_SIZE_DIGIT 0
-#define MAX_SIZE_DIGIT 60
+//The following macros are used to configure the DigitFinder class.
+#define SIGMA 5 //Sigma for the Gaussian smoothing of the input image
+#define PERCENT 99.5 //Percentage for the gray value difference on the input image
+#define MIN_AREA_DIGIT 150
+#define MAX_AREA_DIGIT 99999
+#define MIN_SIZE_DIGIT 18
+#define MAX_SIZE_DIGIT 70
+#define SIZE_MULTIPLIER 2
 
 #include "HalconCpp.h"
 
+//This class is used to collect the outlines of all digits on a given image.
 class DigitFinder
 {
 private:
@@ -27,7 +28,6 @@ public:
 	void print();
 
 	HalconCpp::HRegion getOutlineDigits() { return outlineDigits; };
-
 };
 
 #endif

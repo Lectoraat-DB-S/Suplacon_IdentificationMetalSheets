@@ -4,7 +4,7 @@
 <interface/>
 <body>
 <c>* Step0: Preparation</c>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,1]" as_ord="2">open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', 'Vision_Systeem/Fotos_Plaatcodes/2.jpg', 'default', 1, -1, AcqHandle)</l>
+<l>open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', 'D:/Suplacon_IdentificationMetalSheets/Dataset_Plaatcodes/Foto_Ideale_Situatie/1966580001.jpg', 'default', 1, -1, AcqHandle)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,1]" as_ord="1">grab_image_start (AcqHandle, -1)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">grab_image_async (Image, AcqHandle, -1)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[4,1]" as_ord="1">close_framegrabber (AcqHandle)</l>
@@ -12,6 +12,8 @@
 <c>* Step1: Segmentation</c>
 <l>zoom_image_factor(Image, ImageZoom, 0.25, 0.25, 'constant')</l>
 <l>rgb1_to_gray(ImageZoom, ImageGray)</l>
+<l>*coherence_enhancing_diff(ImageGray, ImageGrayEnhanced,0.5, 3, 0.5, 20)</l>
+<l>*shock_filter(ImageGray, ImageGrayEnhanced,0.5, 10, 'canny', 1)</l>
 <c></c>
 <l>gray_range_rect (ImageGray, ImageResult, 5, 5)</l>
 <l>get_image_size (ImageGray, Width, Height)</l>
