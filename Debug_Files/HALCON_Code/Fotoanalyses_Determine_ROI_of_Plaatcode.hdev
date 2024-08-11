@@ -4,7 +4,7 @@
 <interface/>
 <body>
 <c>* Step0: Preparation</c>
-<l>open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', 'D:/Suplacon_IdentificationMetalSheets/Testfotos_Plaatcodes_2/1_1966518005.jpg', 'default', 1, -1, AcqHandle)</l>
+<l>open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', 'D:/Suplacon_IdentificationMetalSheets/Dataset_Plaatcodes/Foto_Ideale_Situatie/1966580001.jpg', 'default', 1, -1, AcqHandle)</l>
 <l>grab_image_start (AcqHandle, -1)</l>
 <l>grab_image_async (Image, AcqHandle, -1)</l>
 <l>close_framegrabber (AcqHandle)</l>
